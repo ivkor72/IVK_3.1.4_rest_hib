@@ -1,11 +1,52 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="">
+<html lang="en">
 <head>
-  <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
-<h1>Admin, welcome spring boot security page!</h1>
+<div>
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
+</div>
+<br>
+<br>
+<table>
+    <tr>
+        <th>id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>e-mail</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Operations</th>
+    </tr>
+    <div th:each="user : ${users}">
 
-
+        <tr>
+            <td><a th:text="${user.id}">user</a></td>
+            <td><a th:text="${user.firstName}">user</a></td>
+            <td><a th:text="${user.lastName}">user</a></td>
+            <td><a th:text="${user.email}">user</a></td>
+            <td><a th:text="${user.userName}">user</a></td>
+            <td><a th:text="${user.password}">user</a></td>
+            <td>
+                <form th:action="@{/admin/updateUser}">
+                    <button type="submit" th:name="userId" th:value="${user.id}">Update</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/deleteUser}">
+                    <button type="submit"  th:name="userId" th:value="${user.id}">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </div>
+</table>
+<br>
+<br>
+<input type="button" value="Add" onclick="window.location.href='admin/addUser'" />
 </body>
 </html>

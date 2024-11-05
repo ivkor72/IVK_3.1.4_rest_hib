@@ -20,6 +20,8 @@ public class UserDaoImpl implements UserDao {
         this.em = entityManager;
     }
 
+
+
     @Override
     public List<User> getAllUsers() {
 

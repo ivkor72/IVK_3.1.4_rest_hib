@@ -19,20 +19,23 @@ public class User implements UserDetails {
         @Column(name = "id")
         private int id;
 
-        @Column(name = "firstName")
+        @Column(name = "first_name")
         private String firstName;
 
-        @Column(name = "lastName")
+        @Column(name = "last_name")
         private String lastName;
 
         @Column(name = "email")
         private String email;
 
-        @Column(name = "userName")
+        @Column(name = "user_name")
         private String userName;
 
         @Column(name = "password")
         private String password;
+
+        @Column(name = "enabled")
+        private boolean enabled;
 
         @ManyToMany
         Set <Role> roles;
@@ -48,9 +51,31 @@ public class User implements UserDetails {
             this.email = email;
             this.userName = userName;
             this.password = password;
+            this.enabled = enabled;
+            this.roles = roles;
         }
 
-        public int getId() {
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public int getId() {
             return id;
         }
 
@@ -88,17 +113,17 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles;
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return userName;
     }
 
     @Override
