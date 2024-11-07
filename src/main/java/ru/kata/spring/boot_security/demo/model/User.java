@@ -37,7 +37,10 @@ public class User implements UserDetails {
         @Column(name = "enabled")
         private boolean enabled;
 
-        @ManyToMany
+        @Transient
+        private String passwordConfirm;
+
+        @ManyToMany(fetch = FetchType.EAGER)
         Set <Role> roles;
 
         public User() {

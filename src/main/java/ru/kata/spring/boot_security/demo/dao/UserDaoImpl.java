@@ -2,7 +2,12 @@ package ru.kata.spring.boot_security.demo.dao;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
@@ -10,7 +15,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl implements UserDao, UserDetailsService {
 
     @Autowired
     private EntityManager em;
@@ -19,8 +24,6 @@ public class UserDaoImpl implements UserDao {
     public void setEntityManager(EntityManager entityManager) {
         this.em = entityManager;
     }
-
-
 
     @Override
     public List<User> getAllUsers() {
@@ -49,5 +52,15 @@ public class UserDaoImpl implements UserDao {
         User user = em.find(User.class, id);
         em.remove(user);
         em.flush();
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
