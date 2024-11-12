@@ -12,6 +12,7 @@
 <br>
 <form th:method="POST" th:action="@{/saveUser}" th:object="${user}">
   <input name="id" type="hidden" id="id" th:value="${user.id}">
+  <input name="message" type="hidden" id="message" th:value="${message}">
   <label for="firstName">Name: </label>
   <input name="firstName" type="text" id="firstName" th:value="${user.firstName}">
   <br>
@@ -22,6 +23,14 @@
   <br>
   <label for="email">E-mail: </label>
   <input name="email" type="text" id="email" th:value="${user.email}">
+  <br>
+  <br>
+  <label for="userName">Login: </label>
+  <input name="userName" type="text" id="userName" th:value="${user.userName}">
+  <br>
+  <br>
+  <label for="password">Password: </label>
+  <input name="password" type="password" id="password" th:value="${user.password}">
   <br>
   <br>
   <input type="submit" value="OK"  />

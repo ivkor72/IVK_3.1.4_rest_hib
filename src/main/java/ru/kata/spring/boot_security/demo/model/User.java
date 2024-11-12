@@ -3,6 +3,8 @@ package ru.kata.spring.boot_security.demo.model;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kata.spring.boot_security.demo.dao.UserDao;
+import ru.kata.spring.boot_security.demo.dao.UserDaoImpl;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -34,8 +36,8 @@ public class User implements UserDetails {
         @Column(name = "password")
         private String password;
 
-        @Column(name = "enabled")
-        private boolean enabled;
+//        @Column(name = "enabled")
+//        private boolean enabled;
 
         @Transient
         private String passwordConfirm;
@@ -54,9 +56,8 @@ public class User implements UserDetails {
             this.email = email;
             this.userName = userName;
             this.password = password;
-            this.enabled = enabled;
-            this.roles = roles;
         }
+
 
     public String getUserName() {
         return userName;
@@ -66,9 +67,7 @@ public class User implements UserDetails {
         this.userName = userName;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+
 
     public Set<Role> getRoles() {
         return roles;
@@ -147,5 +146,10 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+            return firstName + " " + lastName + " " + email + " " + userName + " " + password;
     }
 }

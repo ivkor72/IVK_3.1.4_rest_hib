@@ -33,12 +33,12 @@
             <td><a th:text="${user.userName}">user</a></td>
             <td><a th:text="${user.password}">user</a></td>
             <td>
-                <form th:action="@{/admin/updateUser}">
+                <form th:action="@{/updateUser}">
                     <button type="submit" th:name="userId" th:value="${user.id}">Update</button>
                 </form>
             </td>
             <td>
-                <form th:action="@{/admin/deleteUser}">
+                <form th:action="@{/deleteUser}">
                     <button type="submit"  th:name="userId" th:value="${user.id}">Delete</button>
                 </form>
             </td>
@@ -47,6 +47,6 @@
 </table>
 <br>
 <br>
-<input type="button" value="Add" onclick="window.location.href='admin/addUser'" />
+<input type="button" value="Add" onclick="window.location.href='addUser'" />
 </body>
 </html>
