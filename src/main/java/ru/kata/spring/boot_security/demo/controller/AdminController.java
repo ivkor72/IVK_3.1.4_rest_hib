@@ -38,7 +38,7 @@ public class AdminController {
     @RequestMapping(value = "/addUser")
     public String addUser(ModelMap model) {
         User user = new User();
-     //   user.setPassword(passwordEncoder.encode(user.getPassword()));
+     //
         model.addAttribute("user", user);
         model.addAttribute("message", "Add User");
         return "addUser";
@@ -46,6 +46,7 @@ public class AdminController {
 
     @RequestMapping(value = "/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user);
         String redirectPach;
          if (message.equals("Add User") | message.equals("Update User")) {
