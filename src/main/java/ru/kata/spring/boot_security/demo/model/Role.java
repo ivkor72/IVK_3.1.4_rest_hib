@@ -11,27 +11,19 @@ import java.util.Set;
 
 @Transactional
 @Entity
-@Table (name = "roles")
+@Table (name = "authorities")
 public class Role implements GrantedAuthority {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @PrimaryKeyJoinColumn(name = "users.username")
+    @Column (name = "username", unique = true)
+    private String userName;
 
-    @Column (unique = true, nullable = false)
-    private String role;
-
-    @ManyToMany(mappedBy = "roles")
-    Set<User> users;
-
-    public Role (Long id){
-        this.id = id;
-    }
-
-    public Role(Long id, String role) {
-        this.id = id;
-        this.role = role;
-    }
+    @Column (name = "authority")
+    private String authority;
 
     public Role() {
 
@@ -39,34 +31,34 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return getRole();
+        return "";
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    private void saveRole () {
-
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public Set<User> getUsers() {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+//
+//    private void saveRole () {
+//
+//    }
 }

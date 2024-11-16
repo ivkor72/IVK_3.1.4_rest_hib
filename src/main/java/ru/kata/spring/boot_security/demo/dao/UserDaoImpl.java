@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-       if (user.getId() == 0) {
+       if (user.getUserName() == null) {
             em.persist(user);
         } else {
             em.merge(user);
@@ -51,14 +51,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUser(int id) {
-        User user = em.find(User.class, id);
+    public User getUser(String userName) {
+        User user = em.find(User.class, userName);
         return user;
     }
 
     @Override
-    public void deleteUser(int id) {
-        User user = em.find(User.class, id);
+    public void deleteUser(String userName) {
+        Role userR = em.find(Role.class, userName);
+        em.remove(userR);
+        em.flush();
+        User user = em.find(User.class, userName);
         em.remove(user);
         em.flush();
     }

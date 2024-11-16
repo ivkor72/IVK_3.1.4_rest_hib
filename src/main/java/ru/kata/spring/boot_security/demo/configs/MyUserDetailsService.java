@@ -21,10 +21,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+
 public class MyUserDetailsService implements UserDetailsService {
 
     @Autowired private UserService userService;
@@ -38,7 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
         UserDetails user = User.builder()
                 .userName(myUser.getUserName())
                 .password(myUser.getPassword())
-                .roles(myUser.getRoles())
+                .enabled(myUser.getEnabled())
                 .build();
 
         return user;

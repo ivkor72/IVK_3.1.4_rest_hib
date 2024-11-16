@@ -23,7 +23,7 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping(value = "/show")
+    @RequestMapping(value = "/admin")
     public String showAllUsers(ModelMap model) {
         List<String> messages = new ArrayList<>();
         messages.add("Hello, admin!");
@@ -50,7 +50,7 @@ public class AdminController {
         userService.saveUser(user);
         String redirectPach;
          if (message.equals("Add User") | message.equals("Update User")) {
-             redirectPach = "redirect:/show";
+             redirectPach = "redirect:/admin";
          } else {
              redirectPach = "redirect:/";
          }
@@ -58,17 +58,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateUser")
-    public String updateUser(@RequestParam("userId") int id, Model model) {
-        User user = userService.getUser(id);
+    public String updateUser(@RequestParam("userName") String userName, Model model) {
+        User user = userService.getUser(userName);
         model.addAttribute("user", user);
         model.addAttribute("message", "Update User");
         return "addUser";
     }
 
     @RequestMapping(value = "/deleteUser")
-    public String deleteUser(@RequestParam("userId") int id, Model model) {
-        userService.deleteUser(id);
-        return "redirect:/show";
+    public String deleteUser(@RequestParam("userName") String userName, Model model) {
+        userService.deleteUser(userName);
+        return "redirect:/admin";
     }
     @RequestMapping(value = "/registration")
     public String showRegistrationForm(ModelMap model) {

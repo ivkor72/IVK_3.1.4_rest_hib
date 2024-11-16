@@ -31,14 +31,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUser(int id) {
-        return userDao.getUser(id);
+    public User getUser(String userName) {
+        return userDao.getUser(userName);
     }
 
     @Override
     @Transactional
-    public void deleteUser(int id) {
-        userDao.deleteUser(id);
+    public void deleteUser(String userName) {
+        userDao.deleteUser(userName);
     }
 
     @Override
