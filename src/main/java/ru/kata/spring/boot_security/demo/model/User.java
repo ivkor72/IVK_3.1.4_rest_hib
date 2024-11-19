@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Builder;
+import lombok.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
 
-//        @Id
+
 //        @GeneratedValue(strategy = GenerationType.IDENTITY)
 //        @Column(name = "id")
 //        private int id;
@@ -72,9 +73,9 @@ public class User implements UserDetails {
         return List.of();
     }
 
-    public String getUserName() {
-        return userName;
-    }
+//    public String getUserName() {
+//        return userName;
+//    }
 
     public void setUserName(String userName) {
         this.userName = userName;

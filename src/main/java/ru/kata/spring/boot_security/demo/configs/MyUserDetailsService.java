@@ -33,7 +33,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Unknown user: " + userName);
         }
         UserDetails user = User.builder()
-                .userName(myUser.getUserName())
+                .userName(myUser.getUsername())
                 .password(myUser.getPassword())
                 .enabled(myUser.getEnabled())
                 .build();

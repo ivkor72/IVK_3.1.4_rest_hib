@@ -8,9 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -42,26 +40,34 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-       if (user.getUserName() == null) {
+
+        if (user.getUsername() == null) {
+            Role role = new Role(user.getUsername(), "ROLE_USER");
             em.persist(user);
+            em.persist(role);
         } else {
+   //         Role role = em.find(Role.class, user.getUsername());
+
             em.merge(user);
+      //      em.merge(role);
         }
         em.flush();
     }
 
     @Override
-    public User getUser(String userName) {
-        User user = em.find(User.class, userName);
+    public User getUser(String username) {
+        User user = em.find(User.class, username);
         return user;
     }
 
     @Override
-    public void deleteUser(String userName) {
-        Role userR = em.find(Role.class, userName);
-        em.remove(userR);
-        em.flush();
-        User user = em.find(User.class, userName);
+    public void deleteUser(String username) {
+        Role userR = em.find(Role.class, username);
+        if (userR !=null) {
+            em.remove(userR);
+            em.flush();
+        }
+        User user = em.find(User.class, username);
         em.remove(user);
         em.flush();
     }

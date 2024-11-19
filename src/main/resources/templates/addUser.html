@@ -25,8 +25,11 @@
 <!--  <input name="email" type="text" id="email" th:value="${user.email}">-->
 <!--  <br>-->
 <!--  <br>-->
+
   <label for="userName">Username: </label>
-  <input name="userName" type="text" id="userName" th:value="${user.userName}">
+<!--  <input name="userName" type="text" id="userName" th:value="${user.username}">-->
+  <input name="userName" type="text" th:readonly="${message=='Update User'}" id="userName" th:value="${user.username}">
+  <p th:hidden="${message!='Update User'}">locked</p>
   <br>
   <br>
   <label for="password">Password: </label>

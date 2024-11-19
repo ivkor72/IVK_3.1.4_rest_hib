@@ -1,13 +1,11 @@
 package ru.kata.spring.boot_security.demo.model;
 
 
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 @Transactional
 @Entity
@@ -22,6 +20,7 @@ public class Role implements GrantedAuthority {
     @Column (name = "username", unique = true)
     private String userName;
 
+    @Setter
     @Column (name = "authority")
     private String authority;
 
@@ -29,12 +28,17 @@ public class Role implements GrantedAuthority {
 
     }
 
-    @Override
-    public String getAuthority() {
-        return "";
+    public Role(String userName, String authority) {
+        this.userName = userName;
+        this.authority = authority;
     }
 
-//    public Long getId() {
+    @Override
+    public String getAuthority() {
+        return authority;
+    }
+
+    //    public Long getId() {
 //        return id;
 //    }
 //

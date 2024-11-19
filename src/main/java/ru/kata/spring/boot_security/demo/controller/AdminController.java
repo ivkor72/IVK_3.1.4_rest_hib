@@ -58,28 +58,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateUser")
-    public String updateUser(@RequestParam("userName") String userName, Model model) {
-        User user = userService.getUser(userName);
+    public String updateUser(@RequestParam("username") String username, Model model) {
+        User user = userService.getUser(username);
         model.addAttribute("user", user);
         model.addAttribute("message", "Update User");
         return "addUser";
     }
 
     @RequestMapping(value = "/deleteUser")
-    public String deleteUser(@RequestParam("userName") String userName, Model model) {
-        userService.deleteUser(userName);
+    public String deleteUser(@RequestParam("username") String username, Model model) {
+        userService.deleteUser(username);
         return "redirect:/admin";
     }
     @RequestMapping(value = "/registration")
     public String showRegistrationForm(ModelMap model) {
         model.addAttribute("message", "Please enter your registration credentials");
         User user = new User();
-//        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
         model.addAttribute("user", user);
-        System.out.println(user.toString());
-        userService.saveUser(user);
         return "addUser";
+    }
+
+    @RequestMapping(value = "/showRoles")
+    public String showRoles(ModelMap model) {
+        return "showRoles";
     }
 
 }

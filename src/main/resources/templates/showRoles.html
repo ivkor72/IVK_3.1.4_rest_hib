@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<h2>User</h2>
+<br><br>
+<h2>Roles:</h2>
+<br>
+<table>
+  <div th:each="role : ${roles}">
+    <tr>
+      <td><a th:text=" ">role</a> </td>
+      <td>
+        <form th:action="@{/deleteRoles}">
+          <button type="submit" th:name="username" th:value="${user.username}">Delete</button>
+        </form>
+      </td>
+
+    </tr>
+  </div>
+
+</table>
+<br>
+<br>
+<form th:action="@{/addRole}">
+  <button type="submit" th:name="username" th:value="${user.username}">Add Role</button>
+</form>
+</body>
+</html>
