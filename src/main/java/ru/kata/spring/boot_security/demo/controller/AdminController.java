@@ -7,6 +7,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kata.spring.boot_security.demo.dao.RoleDao;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -18,9 +20,11 @@ public class AdminController {
 
     private final BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
-    public AdminController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    private RoleDao roleDao;
+    public AdminController(UserService userService, BCryptPasswordEncoder passwordEncoder, RoleDao roleDao) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.roleDao = roleDao;
     }
 
     @RequestMapping(value = "/admin")
@@ -79,8 +83,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/showRoles")
-    public String showRoles(ModelMap model) {
+    public String showRolesByUser(@RequestParam("username") String username, ModelMap model) {
+
+     //   String username = (String) model.getAttribute("username");
+        System.out.println("****************username: " + username);
+        List<Role> roles = roleDao.findRolesByUser(username);
+        model.addAttribute("roles", roles);
+        model.addAttribute("username", username);
         return "showRoles";
+    }
+
+    @RequestMapping(value = "/updateRole")
+    public String addRole(@RequestParam("username") String username, @RequestParam("role") String role, ModelMap model) {
+
+        roleDao.saveRole(username, role);
+        return "addRole";
     }
 
 }

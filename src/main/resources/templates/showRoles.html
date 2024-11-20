@@ -6,17 +6,18 @@
   <title></title>
 </head>
 <body>
-<h2>User</h2>
+<h2>Username: </h2>
+<h2 th:text="${username}"></h2>
 <br><br>
 <h2>Roles:</h2>
 <br>
 <table>
-  <div th:each="role : ${roles}">
+  <div th:each="currentRole : ${roles}">
     <tr>
-      <td><a th:text=" ">role</a> </td>
+      <td><a th:text="${currentRole}">role</a> </td>
       <td>
-        <form th:action="@{/deleteRoles}">
-          <button type="submit" th:name="username" th:value="${user.username}">Delete</button>
+        <form th:action="@{/updateRoles}">
+            <button type="submit" th:name="roles" th:value="${roles}">Update</button>
         </form>
       </td>
 
@@ -26,8 +27,8 @@
 </table>
 <br>
 <br>
-<form th:action="@{/addRole}">
-  <button type="submit" th:name="username" th:value="${user.username}">Add Role</button>
-</form>
+<!--<form th:action="@{/addRole}">-->
+<!--  <button type="submit" th:name="roles" th:value="${roles}">Add Role</button>-->
+<!--</form>-->
 </body>
 </html>
