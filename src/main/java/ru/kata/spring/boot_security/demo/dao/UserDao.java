@@ -13,7 +13,7 @@ public interface UserDao extends JpaRepository<User, Long> {
 
    public List<User> getAllUsers();
 
-   public void saveUser(User user);
+   public void saveUser(User user, String message);
 
    public User getUser(String username);
 

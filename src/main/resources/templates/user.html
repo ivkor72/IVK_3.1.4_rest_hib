@@ -5,7 +5,31 @@
 </head>
 <body>
 <h1>User, welcome spring boot security page!</h1>
+<br>
+<br>
+<table>
+    <tr>
+        <!--        <th>id</th>-->
+        <!--        <th>First name</th>-->
+        <!--        <th>Last name</th>-->
+        <!--        <th>e-mail</th>-->
+        <th>Username</th>
+        <th>Password</th>
+        <th>Enabled</th>
+        <th>Operations</th>
+    </tr>
+    <tr>
+        <!--            <td><a th:text="${user.id}">user</a></td>-->
+        <!--            <td><a th:text="${user.firstName}">user</a></td>-->
+        <!--            <td><a th:text="${user.lastName}">user</a></td>-->
+        <!--            <td><a th:text="${user.email}">user</a></td>-->
+        <td><a th:text="${user.username}">user</a></td>
+        <td><a th:text="${user.password}">user</a></td>
+        <td><a th:text="${user.enabled}">user</a></td>
+        <td>
 
-
+<form name="logoutForm" th:action="@{/logout}" method="post">
+    <input  type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>

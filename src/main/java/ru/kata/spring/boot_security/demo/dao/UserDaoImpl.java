@@ -16,6 +16,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -24,6 +25,12 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     private EntityManager em;
+
+    private final RoleDao roleDao;
+
+    public UserDaoImpl(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
@@ -39,17 +46,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(User user, String message) {
 
-        if (user.getUsername() == null) {
-            Role role = new Role(user.getUsername(), "ROLE_USER");
-            em.persist(user);
-            em.persist(role);
-        } else {
-   //         Role role = em.find(Role.class, user.getUsername());
-
+        if (Objects.equals(message, "Update User")) {
             em.merge(user);
-      //      em.merge(role);
+        } else {
+            em.persist(user);
+            roleDao.saveRole(user.getUsername(), "ROLE_USER");
         }
         em.flush();
     }
@@ -74,6 +77,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String username) {
+
         return null;
     }
 

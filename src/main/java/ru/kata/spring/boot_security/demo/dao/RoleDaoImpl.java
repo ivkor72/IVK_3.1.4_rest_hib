@@ -7,10 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,14 +26,15 @@ public class RoleDaoImpl implements RoleDao {
     @Autowired
     private EntityManager em;
 
+    @Transactional
     @Override
     public void saveRole(String username, String authority) {
         Role role = new Role(username, authority);
-        if (Objects.nonNull(em.find(Role.class, username))) {
+      //  if (Objects.nonNull(em.find(Role.class, authority))) {
+        System.out.println("==save role==========username " + username + " role " + authority);
             em.merge(role);
-        } else {
-            em.persist(role);
-        }
+            em.flush();
+      //  }
     }
 
     @Override
@@ -46,6 +49,13 @@ public class RoleDaoImpl implements RoleDao {
             System.out.println("!!!!!!!!!!!!!!authorities" + authorities);
         }
         return roles;
+    }
+
+    @Override
+    public void deleteRole(String username, String role) {
+
+
+        em.createQuery("delete from Role where authority = :role and userName = :username", Role.class).executeUpdate();
     }
 
 

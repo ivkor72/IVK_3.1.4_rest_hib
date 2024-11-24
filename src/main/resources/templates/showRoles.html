@@ -15,9 +15,15 @@
   <div th:each="currentRole : ${roles}">
     <tr>
       <td><a th:text="${currentRole}">role</a> </td>
+</tr>
+
+      <tr>
       <td>
-        <form th:action="@{/updateRoles}">
-            <button type="submit" th:name="roles" th:value="${roles}">Update</button>
+        <form th:action="@{/updateRole}">
+<!--          <td><input name="username"  id="username" th:value="${username}"></td>-->
+<!--            <button type="submit" th:name="role" th:value="${currentRole}">Update</button>-->
+<!--            <a th:href="@{/updateRole?role={role}&&username={username}(role=${currentRole}, username=${username})}">   Update</a>-->
+            <button type="submit" th:name="username" th:value="${username}">Update roles</button>
         </form>
       </td>
 
@@ -27,6 +33,9 @@
 </table>
 <br>
 <br>
+<form name="logoutForm" th:action="@{/logout}" method="post">
+    <input  type="submit" value="Sign Out"/>
+</form>
 <!--<form th:action="@{/addRole}">-->
 <!--  <button type="submit" th:name="roles" th:value="${roles}">Add Role</button>-->
 <!--</form>-->

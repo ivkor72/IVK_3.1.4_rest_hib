@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface RoleDao {
 
-    public void saveRole(String username, String role);
+    public void saveRole(String username, String authority);
 
     public List<Role> findRolesByUser(String userName);
+
+    public void deleteRole(String username, String authority);
 }

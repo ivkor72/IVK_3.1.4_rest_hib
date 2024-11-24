@@ -29,7 +29,7 @@
   <label for="userName">Username: </label>
 <!--  <input name="userName" type="text" id="userName" th:value="${user.username}">-->
   <input name="userName" type="text" th:readonly="${message=='Update User'}" id="userName" th:value="${user.username}">
-  <p th:hidden="${message!='Update User'}">locked</p>
+  <p th:hidden="${message!='Update User'}">(locked)</p>
   <br>
   <br>
   <label for="password">Password: </label>
@@ -42,6 +42,11 @@
   <br>
   <input type="submit" value="OK"  />
 
+</form>
+<br>
+<br>
+<form name="logoutForm" th:action="@{/logout}" method="post">
+  <input  type="submit" value="Sign Out"/>
 </form>
 </body>
 </html>

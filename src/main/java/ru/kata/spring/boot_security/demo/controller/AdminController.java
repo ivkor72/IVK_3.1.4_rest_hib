@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +13,14 @@ import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class AdminController {
-
+    @Autowired
+    private EntityManager em;
     private final BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
     private RoleDao roleDao;
@@ -51,7 +54,7 @@ public class AdminController {
     @RequestMapping(value = "/saveUser")
     public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.saveUser(user);
+        userService.saveUser(user, message);
         String redirectPach;
          if (message.equals("Add User") | message.equals("Update User")) {
              redirectPach = "redirect:/admin";
@@ -87,17 +90,44 @@ public class AdminController {
 
      //   String username = (String) model.getAttribute("username");
         System.out.println("****************username: " + username);
-        List<Role> roles = roleDao.findRolesByUser(username);
-        model.addAttribute("roles", roles);
-        model.addAttribute("username", username);
+
+        modelForRoles(username, model);
         return "showRoles";
     }
 
-    @RequestMapping(value = "/updateRole")
-    public String addRole(@RequestParam("username") String username, @RequestParam("role") String role, ModelMap model) {
-
-        roleDao.saveRole(username, role);
-        return "addRole";
+    public ModelMap modelForRoles (String username, ModelMap model) {
+        List<Role> roles = roleDao.findRolesByUser(username);
+        model.addAttribute("roles", roles);
+        model.addAttribute("username", username);
+        return model;
     }
 
+    @RequestMapping(value = "updateRole")
+    public String updateRole(@RequestParam("username") String username, ModelMap model) {
+        modelForRoles(username, model);
+        return "updateRole";
+    }
+
+    @RequestMapping(value = "/deleteRole")
+    public String deleteRole(@RequestParam("username") String username, @RequestParam("role") String role, ModelMap model) {
+        roleDao.deleteRole(username, role);
+//        em.createQuery("delete from Role where authority = :role and userName = :username", Role.class).executeUpdate();
+        modelForRoles(username, model);
+
+        return "redirect:/updateRole?username=" + username;
+    }
+
+    @RequestMapping(value = "/addRoleUser")
+    public String addRoleUser(@RequestParam("username") String username, ModelMap model) {
+        roleDao.saveRole(username, "ROLE_USER");
+        modelForRoles(username, model);
+        return "redirect:/updateRole?username=" + username;
+    }
+
+    @RequestMapping(value = "/addRoleAdmin")
+    public String addRoleAdmin(@RequestParam("username") String username, ModelMap model) {
+        roleDao.saveRole(username, "ROLE_ADMIN");
+        modelForRoles(username, model);
+        return "redirect:/updateRole?username=" + username;
+    }
 }

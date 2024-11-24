@@ -17,7 +17,7 @@ public class Role implements GrantedAuthority {
 //    private Long id;
     @Id
     @PrimaryKeyJoinColumn(name = "users.username")
-    @Column (name = "username", unique = true)
+    @Column (name = "username")
     private String userName;
 
     @Setter

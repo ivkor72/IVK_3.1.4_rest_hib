@@ -55,5 +55,10 @@
 <br>
 <br>
     <input type="button" value="Add" onclick="window.location.href='addUser'" />
+<br>
+<br>
+<form name="logoutForm" th:action="@{/logout}" method="post">
+    <input  type="submit" value="Sign Out"/>
+</form>
 </body>
 </html>
