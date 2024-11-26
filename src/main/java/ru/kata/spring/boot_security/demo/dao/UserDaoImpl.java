@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
+
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -77,10 +79,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String username) {
-
         return null;
     }
 
+        public User findUserByUsername(String username) {
+        User user = em.find(User.class, username);
+
+        return user;
+    }
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return null;
