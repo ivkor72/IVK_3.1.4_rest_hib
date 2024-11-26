@@ -11,23 +11,8 @@
 <br>
 <br>
 <form th:method="POST" th:action="@{/saveUser}" th:object="${user}">
-<!--  <input name="id" type="hidden" id="id" th:value="${user.id}">-->
   <input name="message" type="hidden" id="message" th:value="${message}">
-<!--  <label for="firstName">Name: </label>-->
-<!--  <input name="firstName" type="text" id="firstName" th:value="${user.firstName}">-->
-<!--  <br>-->
-<!--  <br>-->
-<!--  <label for="lastName">Last name: </label>-->
-<!--  <input name="lastName" type="text" id="lastName" th:value="${user.lastName}">-->
-<!--  <br>-->
-<!--  <br>-->
-<!--  <label for="email">E-mail: </label>-->
-<!--  <input name="email" type="text" id="email" th:value="${user.email}">-->
-<!--  <br>-->
-<!--  <br>-->
-
   <label for="userName">Username: </label>
-<!--  <input name="userName" type="text" id="userName" th:value="${user.username}">-->
   <input name="userName" type="text" th:readonly="${message=='Update User'}" id="userName" th:value="${user.username}">
   <p th:hidden="${message!='Update User'}">(locked)</p>
   <br>

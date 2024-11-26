@@ -15,24 +15,14 @@
 <br>
 <table>
     <tr>
-<!--        <th>id</th>-->
-<!--        <th>First name</th>-->
-<!--        <th>Last name</th>-->
-<!--        <th>e-mail</th>-->
         <th>Username</th>
-<!--        <th>Password</th>-->
         <th>Enabled</th>
         <th>Operations</th>
     </tr>
     <div th:each="user : ${users}">
 
         <tr>
-<!--            <td><a th:text="${user.id}">user</a></td>-->
-<!--            <td><a th:text="${user.firstName}">user</a></td>-->
-<!--            <td><a th:text="${user.lastName}">user</a></td>-->
-<!--            <td><a th:text="${user.email}">user</a></td>-->
             <td><a th:text="${user.username}">user</a></td>
-<!--            <td><a th:text="${user.password}">user</a></td>-->
             <td><a th:text="${user.enabled}">user</a></td>
             <td>
                 <form th:action="@{/showRoles}">
@@ -46,7 +36,7 @@
             </td>
             <td>
                 <form th:action="@{/deleteUser}">
-                    <button type="submit"  th:name="username" th:value="${user.username}">Delete</button>
+                    <button type="submit" th:name="username" th:value="${user.username}">Delete</button>
                 </form>
             </td>
         </tr>
@@ -54,11 +44,11 @@
 </table>
 <br>
 <br>
-    <input type="button" value="Add" onclick="window.location.href='addUser'" />
+<input type="button" value="Add" onclick="window.location.href='addUser'"/>
 <br>
 <br>
 <form name="logoutForm" th:action="@{/logout}" method="post">
-    <input  type="submit" value="Sign Out"/>
+    <input type="submit" value="Sign Out"/>
 </form>
 </body>
 </html>

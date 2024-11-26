@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Spring Security Example</title>
 </head>
@@ -9,28 +10,16 @@
 <br>
 <table>
     <tr>
-        <!--        <th>id</th>-->
-        <!--        <th>First name</th>-->
-        <!--        <th>Last name</th>-->
-        <!--        <th>e-mail</th>-->
         <th>Username</th>
-<!--        <th>Password</th>-->
         <th>Enabled</th>
         <th>Operations</th>
     </tr>
     <tr>
-        <!--            <td><a th:text="${user.id}">user</a></td>-->
-        <!--            <td><a th:text="${user.firstName}">user</a></td>-->
-        <!--            <td><a th:text="${user.lastName}">user</a></td>-->
-        <!--            <td><a th:text="${user.email}">user</a></td>-->
         <td><a th:text="${user.username}">user</a></td>
-<!--        <td><a th:text="${user.password}" >user</a></td>-->
-<!--        <td><input name="password" type="password" id="password" th:value="${user.password}"></td>-->
         <td><a th:text="${user.enabled}">user</a></td>
         <td>
-
-<form name="logoutForm" th:action="@{/logout}" method="post">
-    <input  type="submit" value="Sign Out"/>
-</form>
+            <form name="logoutForm" th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
 </body>
 </html>

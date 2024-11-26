@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="">
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Update role</title>
+    <meta charset="UTF-8">
+    <title>Update role</title>
 </head>
 <body>
 <h2>Username: </h2>
@@ -12,39 +12,33 @@
 <h2>Roles:</h2>
 <br>
 <table>
-  <div th:each="currentRole : ${roles}">
-    <tr>
-      <td> <a th:text="${currentRole}"></a> </td>
-<!--      <td>-->
-<!--        <form th:action="@{/deleteRole}">-->
-<!--          <a th:href="@{/deleteRole?role={role}&&username={username}(role=${currentRole}, username=${username})}">Delete Role</a>-->
-<!--        </form>-->
-<!--      </td>-->
-    </tr>
-    <tr>
-      <td>
-        <form th:action="@{/addRoleUser}">
-          <button type="submit" th:name="username" th:value="${username}">Assign a role User</button>
-        </form>
-      </td>
-      <td>
-        <form th:action="@{/addRoleAdmin}">
-          <button type="submit" th:name="username" th:value="${username}">Assign a role Admin</button>
-        </form>
-      </td>
-    </tr>
-  </div>
-
+    <div th:each="currentRole : ${roles}">
+        <tr>
+            <td><a th:text="${currentRole}"></a></td>
+        </tr>
+        <tr>
+            <td>
+                <form th:action="@{/addRoleUser}">
+                    <button type="submit" th:name="username" th:value="${username}">Assign a role User</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/addRoleAdmin}">
+                    <button type="submit" th:name="username" th:value="${username}">Assign a role Admin</button>
+                </form>
+            </td>
+        </tr>
+    </div>
 </table>
 <br>
 <br>
 <form th:action="@{/admin}">
-  <button type="submit">OK</button>
+    <button type="submit">OK</button>
 </form>
 <br>
 <br>
 <form name="logoutForm" th:action="@{/logout}" method="post">
-  <input  type="submit" value="Sign Out"/>
+    <input type="submit" value="Sign Out"/>
 </form>
 </body>
 </html>

@@ -43,7 +43,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> usersList = em.createQuery("from User", User.class).getResultList();
         System.out.println(usersList);
-        return   usersList;
+        return usersList;
 
     }
 
@@ -68,7 +68,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(String username) {
         Role userR = em.find(Role.class, username);
-        if (userR !=null) {
+        if (userR != null) {
             em.remove(userR);
             em.flush();
         }
@@ -82,7 +82,7 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-        public User findUserByUsername(String username) {
+    public User findUserByUsername(String username) {
         User user = em.find(User.class, username);
 
         return user;

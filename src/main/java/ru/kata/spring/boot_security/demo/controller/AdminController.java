@@ -24,6 +24,7 @@ public class AdminController {
     private final BCryptPasswordEncoder passwordEncoder;
     private UserService userService;
     private RoleDao roleDao;
+
     public AdminController(UserService userService, BCryptPasswordEncoder passwordEncoder, RoleDao roleDao) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
@@ -45,7 +46,7 @@ public class AdminController {
     @RequestMapping(value = "/addUser")
     public String addUser(ModelMap model) {
         User user = new User();
-     //
+        user.setEnabled(true);
         model.addAttribute("user", user);
         model.addAttribute("message", "Add User");
         return "addUser";
@@ -56,11 +57,11 @@ public class AdminController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user, message);
         String redirectPach;
-         if (message.equals("Add User") | message.equals("Update User")) {
-             redirectPach = "redirect:/admin";
-         } else {
-             redirectPach = "redirect:/";
-         }
+        if (message.equals("Add User") | message.equals("Update User")) {
+            redirectPach = "redirect:/admin";
+        } else {
+            redirectPach = "redirect:/";
+        }
         return redirectPach;
     }
 
@@ -77,25 +78,23 @@ public class AdminController {
         userService.deleteUser(username);
         return "redirect:/admin";
     }
+
     @RequestMapping(value = "/registration")
     public String showRegistrationForm(ModelMap model) {
         model.addAttribute("message", "Please enter your registration credentials");
         User user = new User();
+        user.setEnabled(true);
         model.addAttribute("user", user);
         return "addUser";
     }
 
     @RequestMapping(value = "/showRoles")
     public String showRolesByUser(@RequestParam("username") String username, ModelMap model) {
-
-     //   String username = (String) model.getAttribute("username");
-        System.out.println("****************username: " + username);
-
         modelForRoles(username, model);
         return "showRoles";
     }
 
-    public ModelMap modelForRoles (String username, ModelMap model) {
+    public ModelMap modelForRoles(String username, ModelMap model) {
         List<Role> roles = roleDao.findRolesByUser(username);
         model.addAttribute("roles", roles);
         model.addAttribute("username", username);
@@ -111,9 +110,7 @@ public class AdminController {
     @RequestMapping(value = "/deleteRole")
     public String deleteRole(@RequestParam("username") String username, @RequestParam("role") String role, ModelMap model) {
         roleDao.deleteRole(username, role);
-//        em.createQuery("delete from Role where authority = :role and userName = :username", Role.class).executeUpdate();
         modelForRoles(username, model);
-
         return "redirect:/updateRole?username=" + username;
     }
 

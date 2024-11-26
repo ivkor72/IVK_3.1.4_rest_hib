@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="">
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
 <h2>Username: </h2>
@@ -12,32 +12,26 @@
 <h2>Roles:</h2>
 <br>
 <table>
-  <div th:each="currentRole : ${roles}">
-    <tr>
-      <td><a th:text="${currentRole}">role</a> </td>
-</tr>
+    <div th:each="currentRole : ${roles}">
+        <tr>
+            <td><a th:text="${currentRole}">role</a></td>
+        </tr>
 
-      <tr>
-      <td>
-        <form th:action="@{/updateRole}">
-<!--          <td><input name="username"  id="username" th:value="${username}"></td>-->
-<!--            <button type="submit" th:name="role" th:value="${currentRole}">Update</button>-->
-<!--            <a th:href="@{/updateRole?role={role}&&username={username}(role=${currentRole}, username=${username})}">   Update</a>-->
-            <button type="submit" th:name="username" th:value="${username}">Update roles</button>
-        </form>
-      </td>
+        <tr>
+            <td>
+                <form th:action="@{/updateRole}">
+                    <button type="submit" th:name="username" th:value="${username}">Update roles</button>
+                </form>
+            </td>
 
-    </tr>
-  </div>
+        </tr>
+    </div>
 
 </table>
 <br>
 <br>
 <form name="logoutForm" th:action="@{/logout}" method="post">
-    <input  type="submit" value="Sign Out"/>
+    <input type="submit" value="Sign Out"/>
 </form>
-<!--<form th:action="@{/addRole}">-->
-<!--  <button type="submit" th:name="roles" th:value="${roles}">Add Role</button>-->
-<!--</form>-->
 </body>
 </html>
