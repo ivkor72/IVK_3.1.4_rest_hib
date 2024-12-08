@@ -16,6 +16,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -49,7 +50,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user, String message) {
-
         if (Objects.equals(message, "Update User")) {
             em.merge(user);
         } else {
@@ -67,11 +67,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(String username) {
-        Role userR = em.find(Role.class, username);
-        if (userR != null) {
-            em.remove(userR);
+        List <Role> roles = em.createQuery("from Role", Role.class).getResultList();
+        for (Role userR : roles) {
+            if (userR.getUsername().equals(username)) {
+                em.remove(userR);
+            }
+        };
+
             em.flush();
-        }
+
         User user = em.find(User.class, username);
         em.remove(user);
         em.flush();

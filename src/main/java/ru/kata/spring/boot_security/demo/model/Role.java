@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +14,10 @@ import javax.persistence.*;
 public class Role implements GrantedAuthority {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+//    @Id
+
     @PrimaryKeyJoinColumn(name = "users.username")
     @Column(name = "username")
     private String userName;
@@ -19,6 +25,7 @@ public class Role implements GrantedAuthority {
     @Setter
     @Column(name = "authority")
     private String authority;
+
 
     public Role() {
 
@@ -43,4 +50,11 @@ public class Role implements GrantedAuthority {
         return authority;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
