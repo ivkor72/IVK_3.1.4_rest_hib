@@ -49,12 +49,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user, String message) {
+    public void saveUser(User user, String message, String role) {
         if (Objects.equals(message, "Update User")) {
             em.merge(user);
         } else {
             em.persist(user);
-            roleDao.saveRole(user.getUsername(), "ROLE_USER");
+            roleDao.saveRole(user.getUsername(), role);
         }
         em.flush();
     }

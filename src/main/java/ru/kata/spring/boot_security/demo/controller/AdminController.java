@@ -85,6 +85,10 @@ public class AdminController {
             usersAndRoles.add(new UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
         }
         model.addAttribute("usersAndRoles", usersAndRoles);
+        User user = new User();
+        model.addAttribute("user", user);
+        Role role = new Role();
+        model.addAttribute("role", role);
         return "show";
     }
 
@@ -98,14 +102,16 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/saveUser")
-    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message) {
+   // public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
+        public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
+        System.out.println("======SAVE_USER: USER - "+user+" , MESSAGE - "+message+" , ROLE - "+role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.saveUser(user, message);
+        userService.saveUser(user, message, role);
         String redirectPach;
         if (message.equals("Add User") | message.equals("Update User")) {
             redirectPach = "redirect:/admin";
         } else {
-            redirectPach = "redirect:/";
+            redirectPach = "redirect:/admin";
         }
         return redirectPach;
     }
@@ -163,7 +169,7 @@ public class AdminController {
     public String addRoleUser(@RequestParam("username") String username, ModelMap model) {
         roleDao.saveRole(username, "ROLE_USER");
         modelForRoles(username, model);
-        return "redirect:/updateRole?username=" + username;
+        return "redirect:/show";
     }
 
     @RequestMapping(value = "/addRoleAdmin")

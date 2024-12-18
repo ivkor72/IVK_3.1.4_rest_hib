@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:c="">
-<html lang="en">
+<!doctype html>
+<html lang="ru" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <!-- Обязательные метатеги -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title></title>
+
+
+    <title>Admin page</title>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -28,154 +34,152 @@
         </div>
     </div>
 </div>
-<div class="container_fluid">
-    <div class = "row">
-        <div class="col-1">
-            <ul class="nav flex-sm-column">
-                <li class="nav-item">
-                    <a class="nav-link active bg-primary text-white" aria-current="page">Admin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user">User</a>
-                </li>
-            </ul>
-        </div>
-        <div class = "col-11 bg-light">
-            <h3>Панель администратора</h3>
-            <div class = "bd-example">
-                <nav>
-                    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Таблица пользователей</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Новый пользователь</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <p><strong>Все пользователи</strong></p>
-                        <table>
-                            <tr>
-                                <th width="200 px" height="50 px">Имя пользователя</th>
-                                <th width="200 px" height="50 px">Доступ</th>
-                                <th width="250 px" height="50 px">Роли</th>
-                                <th width="100 px" height="50 px">Операции</th>
-                            </tr>
-                            <div th:each="user : ${usersAndRoles}">
-
-                                <tr>
-                                    <td><a th:text="${user.username}">user</a></td>
-                                    <td><a th:text="${user.enabled}">user</a></td>
-                                    <td><a th:text="${user.roles}">roles</a></td>
-<!--                                    <td>-->
-<!--                                        <form th:action="@{/showRoles}">-->
-<!--                                            <button type="submit" th:name="username" th:value="${user.username}">Roles</button>-->
-<!--                                        </form>-->
-<!--                                    </td>-->
-                                    <td>
-                                        <form th:action="@{/updateUser}">
-                                            <button type="submit" style="background-color:royalblue; border-color:royalblue; color: white" th:name="username" th:value="${user.username}">Изменить</button>
-                                        </form>
-                                    </td>
-                                    <td>
-                                        <form th:action="@{/deleteUser}">
-                                            <button type="submit" style="background-color:red; border-color:red; color: white"  th:name="username" th:value="${user.username}">Удалить</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </div>
-                        </table>
-<!--                        <div class="col-5" id="allUsersTable">-->
+<div class = "row">
+    <div class="col-1">
+        <ul class="nav flex-sm-column">
+            <li class="nav-item">
+                <a class="nav-link active bg-primary text-white" aria-current="page">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user">User</a>
+            </li>
+        </ul>
+    </div>
+    <div class = "col-11 bg-light">
+        <h3>Панель администратора</h3>
+        <div class = "bd-example">
+            <nav>
+                <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Таблица пользователей</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Новый пользователь</a>
                 </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <p><strong>Все пользователи</strong></p>
+                    <table>
+                        <tr>
+                            <th width="200 px" height="50 px">Имя пользователя</th>
+                            <th width="200 px" height="50 px">Доступ</th>
+                            <th width="250 px" height="50 px">Роли</th>
+                            <th width="100 px" height="50 px">Операции</th>
+                        </tr>
+                        <div th:each="user : ${usersAndRoles}">
 
-                            <div class="row">
-                                <div class="col"></div>
-                                <!--Форма ввода нового пользователя-->
-                                <form class="col-3" th:action="@{/saveUser}" th:method="post" th:object="${usersAndRoles}" th:align="center">
-                                    <div class="row">
-                                        <p><strong>Добавление нового пользователя</strong></p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="row">
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroup-sizing-sm1">Имя пользователя</span>
-                                                </div>
-                                                <input type="text" th:field="${usersAndRoles.username}" id="name" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                            </div>
-                                        </div>
-<!--                                        <div class="row">-->
-<!--                                            <div class="input-group input-group-sm mb-3">-->
-<!--                                                <div class="input-group-prepend">-->
-<!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm2">Фамилия</span>-->
-<!--                                                </div>-->
-<!--                                                <input type="text" th:field="*{lastName}" id="lastName" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="row">-->
-<!--                                            <div class="input-group input-group-sm mb-3">-->
-<!--                                                <div class="input-group-prepend">-->
-<!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm3">Возраст</span>-->
-<!--                                                </div>-->
-<!--                                                <input type="number" th:field="*{age}" id="age" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" min="1" max="200" required>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                        <div class="row">-->
-<!--                                            <div class="input-group input-group-sm mb-3">-->
-<!--                                                <div class="input-group-prepend">-->
-<!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm4">Логин</span>-->
-<!--                                                </div>-->
-<!--                                                <input type="text" th:field="*{username}" id="username" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-                                        <div class="row">
-                                            <div class="input-group input-group-sm mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="inputGroup-sizing-sm5">Пароль</span>
-                                                </div>
-                                                <input type="text" th:field="*{usersAndRoles.password}" id="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                                            </div>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text" id="inputGroup-sizing-sm6">
-                                                    <input type="checkbox" checked th:value="${usersAndRoles.enabled}">
-
-                                                </div>
-                                            </div>
-                                            <input type="text" class="form-control" value = "Доступ">
-
-                                        </div>
-                                        <div class="d-flex flex-row bd-highlight">
-                                            <div class="form-group">
-                                                <label for="roles">Роли</label>
-                                                <select class="custom-select bd-primary" multiple name="roles" id="roles">
-                                                    <option value="1">ROLE_USER</option>
-                                                    <option value="2">ROLE_ADMIN</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex flex-row bd-highlight" >
-                                        <button type="submit" class="btn btn-success">Создать</button>
-                                    </div>
-                                </form>
-
-                                <div class="col"></div>
-                            </div>
-
+                            <tr>
+                                <td><a th:text="${user.username}">user</a></td>
+                                <td><a th:text="${user.enabled}">user</a></td>
+                                <td><a th:text="${user.roles}">roles</a></td>
+                                <!--                                    <td>-->
+                                <!--                                        <form th:action="@{/showRoles}">-->
+                                <!--                                            <button type="submit" th:name="username" th:value="${user.username}">Roles</button>-->
+                                <!--                                        </form>-->
+                                <!--                                    </td>-->
+                                <td>
+                                    <form th:action="@{/updateUser}">
+                                        <button type="submit" style="background-color:royalblue; border-color:royalblue; color: white" th:name="username" th:value="${user.username}">Изменить</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form th:action="@{/deleteUser}">
+                                        <button type="submit" style="background-color:red; border-color:red; color: white"  th:name="username" th:value="${user.username}">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
                         </div>
+                    </table>
+                    <!--                        <div class="col-5" id="allUsersTable">-->
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+                    <div class="row">
+                        <div class="col"></div>
+                        <!--Форма ввода нового пользователя-->
+                        <form class="col-3" th:action="@{/saveUser}" th:method="post" th:object="${user}" th:align="center" >
+<!--                            <input name="role" type="hidden" id="role" th:value="${role}">-->
+                            <div class="row">
+                                <p><strong>Добавление нового пользователя</strong></p>
+                            </div>
+                            <div class="row">
+                                <div class="row">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm1">Имя пользователя</span>
+                                        </div>
+                                        <input name="userName" type="text" id="userName" th:value="${user.username}">
+                                    </div>
+                                </div>
+                                <!--                                        <div class="row">-->
+                                <!--                                            <div class="input-group input-group-sm mb-3">-->
+                                <!--                                                <div class="input-group-prepend">-->
+                                <!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm2">Фамилия</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <input type="text" th:field="*{lastName}" id="lastName" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="row">-->
+                                <!--                                            <div class="input-group input-group-sm mb-3">-->
+                                <!--                                                <div class="input-group-prepend">-->
+                                <!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm3">Возраст</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <input type="number" th:field="*{age}" id="age" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" min="1" max="200" required>-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="row">-->
+                                <!--                                            <div class="input-group input-group-sm mb-3">-->
+                                <!--                                                <div class="input-group-prepend">-->
+                                <!--                                                    <span class="input-group-text" id="inputGroup-sizing-sm4">Логин</span>-->
+                                <!--                                                </div>-->
+                                <!--                                                <input type="text" th:field="*{username}" id="username" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">-->
+                                <!--                                            </div>-->
+                                <!--                                        </div>-->
+
+                                <div class="row">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm5">Пароль</span>
+                                        </div>
+                                        <input type="password" th:field="${user.password}" id="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="inputGroup-sizing-sm6">Доступ</span>
+                                        </div>
+                                        <input type="text" value="true" th:field="${user.enabled}"  id="enabled" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row bd-highlight">
+                                    <div class="form-group">
+                                        <label for="role">Роли</label>
+                                        <select class="form-select"  multiple data-title="Options"  name="role" id="role">
+                                            <option value="ROLE_USER" >ROLE_USER</option>
+                                            <option value="ROLE_ADMIN" >ROLE_ADMIN</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row bd-highlight" >
+                                <button type="submit" class="btn btn-success">Создать</button>
+                            </div>
+                        </form>
+
+                        <div class="col"></div>
+                    </div>
+
+                </div>
 
 
 
 
 
             </div>
-        </div>
+
         </div>
     </div>
 
 </div>
-
 
 <!--<div>-->
 <!--    <th:block th:each="msg : ${messages}">-->
