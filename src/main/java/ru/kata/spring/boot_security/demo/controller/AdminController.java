@@ -74,6 +74,15 @@ public class AdminController {
         String currentusername = authentication.getName();
         User currentuser = userService.getUser(currentusername);
         List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
+        int r = 0;
+        for (Role role : currentuserroles) {
+            if (role.getAuthority() == "ROLE_ADMIN") {
+                r = 1;
+            } else {
+                r = 0;
+            }
+        }
+        model.addAttribute("r", r);
         model.addAttribute("currentusername", currentusername);
         model.addAttribute("currentuserroles", currentuserroles);
         List<String> messages = new ArrayList<>();
@@ -104,16 +113,10 @@ public class AdminController {
     @RequestMapping(value = "/saveUser")
    // public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
         public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
-        System.out.println("======SAVE_USER: USER - "+user+" , MESSAGE - "+message+" , ROLE - "+role);
+        System.out.println("======SAVE_USER: USER - name - "+user.getUsername()+", enabled - "+user.getEnabled()+" , MESSAGE - "+message+" , ROLE - "+role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.saveUser(user, message, role);
-        String redirectPach;
-        if (message.equals("Add User") | message.equals("Update User")) {
-            redirectPach = "redirect:/admin";
-        } else {
-            redirectPach = "redirect:/admin";
-        }
-        return redirectPach;
+        return "redirect:/admin";
     }
 
     @RequestMapping(value = "/updateUser")

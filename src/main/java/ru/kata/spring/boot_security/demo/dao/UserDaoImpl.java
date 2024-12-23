@@ -43,20 +43,24 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> usersList = em.createQuery("from User", User.class).getResultList();
-        System.out.println(usersList);
         return usersList;
 
     }
 
     @Override
     public void saveUser(User user, String message, String role) {
-        if (Objects.equals(message, "Update User")) {
-            em.merge(user);
-        } else {
-            em.persist(user);
-            roleDao.saveRole(user.getUsername(), role);
+        List<User> userList = getAllUsers();
+        for (User u : userList) {
+            if (Objects.equals(u.getUsername(), user.getUsername())) {
+                em.merge(user);
+                em.flush();
+                roleDao.saveRole(user.getUsername(), role);
+                return;
+            }
         }
-        em.flush();
+            em.persist(user);
+            em.flush();
+            roleDao.saveRole(user.getUsername(), role);
     }
 
     @Override

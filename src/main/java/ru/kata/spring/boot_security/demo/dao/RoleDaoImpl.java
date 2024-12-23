@@ -20,6 +20,9 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public void saveRole(String username, String authority) {
+        if (authority == null || authority.isEmpty()) {
+            return;
+        }
         Role role = new Role(username, authority);
         List<Role> roles = findRolesByUser(username);
         for (Role role1 : roles) {
@@ -43,8 +46,7 @@ public class RoleDaoImpl implements RoleDao {
                 roles.add(role);
             }
         }
-        System.out.println("AAAAAAAAAAAAAA "+ authorities);
-        System.out.println("RRRRRRRRRRRRRR "+ roles);
+
         return roles;
     }
 

@@ -77,7 +77,8 @@
                                 <!--                                    </td>-->
                                 <td>
                                     <form th:action="@{/updateUser}">
-                                        <button type="submit" style="background-color:royalblue; border-color:royalblue; color: white" th:name="username" th:value="${user.username}">Изменить</button>
+<!--                                        <button type="submit" style="background-color:royalblue; border-color:royalblue; color: white" th:name="username" th:value="${user.username}">Изменить</button>-->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit">Изменить</button>
                                     </form>
                                 </td>
                                 <td>
@@ -154,8 +155,8 @@
                                     <div class="form-group">
                                         <label for="role">Роли</label>
                                         <select class="form-select"  multiple data-title="Options"  name="role" id="role">
-                                            <option value="ROLE_USER" >ROLE_USER</option>
-                                            <option value="ROLE_ADMIN" >ROLE_ADMIN</option>
+                                            <option value="ROLE_USER" >USER</option>
+                                            <option value="ROLE_ADMIN" >ADMIN</option>
                                         </select>
                                     </div>
                                 </div>
@@ -164,38 +165,80 @@
                                 <button type="submit" class="btn btn-success">Создать</button>
                             </div>
                         </form>
-
                         <div class="col"></div>
                     </div>
-
                 </div>
-
-
-
-
-
             </div>
-
         </div>
     </div>
-
 </div>
 
-<!--<div>-->
-<!--    <th:block th:each="msg : ${messages}">-->
-<!--        <h1 th:text="${msg}"></h1>-->
-<!--    </th:block>-->
-<!--</div>-->
-<!--<br>-->
-<!--<br>-->
+<!-- окно редактирования пользователя -->
+<div class="editForm">
+    <form class="col-3" th:action="@{/saveUser}" th:method="PATCH" th:object="${user}">
+        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelEdit">Редактирование</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-<!--<br>-->
-<!--<br>-->
-<!--<input type="button" value="Add" onclick="window.location.href='addUser'"/>-->
-<!--<br>-->
-<!--<br>-->
-<!--<form name="logoutForm" th:action="@{/logout}" method="post">-->
-<!--    <input type="submit" value="Sign Out"/>-->
-<!--</form>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="id" class="col-form-label">ID:</label>-->
+<!--                            <input type="text" class="form-control" id="id" name="id" value="" readonly="readonly"/>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="name" class="col-form-label">Имя:</label>-->
+<!--                            <input type="text" class="form-control" id="name" name="name" value="" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="lastName" class="col-form-label">Фамилия:</label>-->
+<!--                            <input type="text" class="form-control" id="lastName" name="LastName" value="" />-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="age" class="col-form-label">Возраст:</label>-->
+<!--                            <input type="number" class="form-control" id="age" name="age" value="" min="1" max="200" required/>-->
+<!--                        </div>-->
+                        <div class="form-group">
+                            <label for="userName" class="col-form-label">Логин:</label>
+                            <input name="userName" type="text" id="userName1" th:value="${user.username}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-form-label">Пароль:</label>
+                            <input type="password" class="form-control" id="password1" name="password" th:value="${user.password}">
+                        </div>
+                        <div class="form-group">
+                            <label for="enabled" class="col-form-label">Пароль:</label>
+                            <input type="text" class="form-control" id="enabled1" name="enabled" th:value="${user.enabled}">
+                        </div>
+
+                        <div class="d-flex flex-row bd-highlight">
+                            <div class="form-group">
+                                <label for="role">Роли</label>
+
+                                <select class="custom-select bd-primary" multiple name="role" id="role1" th:value="${role}">
+                                    <option value="ROLE_USER">USER</option>
+                                    <option value="ROLE_ADMIN">ADMIN</option>
+                                </select>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                        <input type="submit" class="btn btn-success" value="Сохранить"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
 </body>
 </html>
