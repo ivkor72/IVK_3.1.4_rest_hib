@@ -74,15 +74,6 @@ public class AdminController {
         String currentusername = authentication.getName();
         User currentuser = userService.getUser(currentusername);
         List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
-        int r = 0;
-        for (Role role : currentuserroles) {
-            if (role.getAuthority() == "ROLE_ADMIN") {
-                r = 1;
-            } else {
-                r = 0;
-            }
-        }
-        model.addAttribute("r", r);
         model.addAttribute("currentusername", currentusername);
         model.addAttribute("currentuserroles", currentuserroles);
         List<String> messages = new ArrayList<>();
@@ -120,11 +111,11 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateUser")
-    public String updateUser(@RequestParam("username") String username, Model model) {
-        User user = userService.getUser(username);
+    public String updateUser(@RequestParam("user") User user, Model model) {
+//        User user = userService.getUser(username);
         model.addAttribute("user", user);
         model.addAttribute("message", "Update User");
-        return "addUser";
+        return "#exampleModalEdit";
     }
 
     @RequestMapping(value = "/deleteUser")

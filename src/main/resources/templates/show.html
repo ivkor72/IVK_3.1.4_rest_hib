@@ -76,7 +76,7 @@
                                 <!--                                        </form>-->
                                 <!--                                    </td>-->
                                 <td>
-                                    <form th:action="@{/updateUser}">
+                                    <form th:action="@{/updateUser}" th:object="${user}">
 <!--                                        <button type="submit" style="background-color:royalblue; border-color:royalblue; color: white" th:name="username" th:value="${user.username}">Изменить</button>-->
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalEdit">Изменить</button>
                                     </form>
@@ -175,7 +175,7 @@
 
 <!-- окно редактирования пользователя -->
 <div class="editForm">
-    <form class="col-3" th:action="@{/saveUser}" th:method="PATCH" th:object="${user}">
+    <form class="col-3" th:action="@{/saveUser}" th:method="PATCH" >
         <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -205,7 +205,7 @@
 <!--                        </div>-->
                         <div class="form-group">
                             <label for="userName" class="col-form-label">Логин:</label>
-                            <input name="userName" type="text" id="userName1" th:value="${user.username}">
+                            <input name="userName" type="text" id="userName1" th:value="">
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-form-label">Пароль:</label>
@@ -236,9 +236,16 @@
                 </div>
             </div>
         </div>
-
     </form>
 </div>
-
+<script type="text/javascript">
+    $('#exampleModalEdit').on('show.bs.modal', function (e) {
+        const username = $(e.relatedTarget).data('userName');   // Получаем значение username
+        $(this).find('userName1').val(username); // Передаем его в скрытое поле.
+    });
+    // $.get(href, function(user, status) {
+    //     $('.exampleModalEdit #userName1').val(user.userName);
+    // })
+</script>
 </body>
 </html>

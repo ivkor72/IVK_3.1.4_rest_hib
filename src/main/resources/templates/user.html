@@ -38,7 +38,7 @@
     <div class="col-1">
         <ul class="nav flex-sm-column">
             <li class="nav-item">
-                <a th:hidden="${r}!=1" class="nav-link" href="/admin">Admin</a>
+                <a th:hidden="${isRoleAdmin} == false" class="nav-link" href="/admin">Admin</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active bg-primary text-white" aria-current="page">User</a>
@@ -63,12 +63,12 @@
                             <th width="250 px" height="50 px">Роли</th>
                             <th width="100 px" height="50 px">Операции</th>
                         </tr>
-                        <div th:each="user : ${usersAndRoles}">
+
 
                             <tr>
                                 <td><a th:text="${user.username}">user</a></td>
                                 <td><a th:text="${user.enabled}">user</a></td>
-                                <td><a th:text="${user.roles}">roles</a></td>
+                                <td><a th:text="${roles}">roles</a></td>
                                 <!--                                    <td>-->
                                 <!--                                        <form th:action="@{/showRoles}">-->
                                 <!--                                            <button type="submit" th:name="username" th:value="${user.username}">Roles</button>-->
@@ -76,7 +76,7 @@
                                 <!--                                    </td>-->
 
                             </tr>
-                        </div>
+
                     </table>
                     <!--                        <div class="col-5" id="allUsersTable">-->
                 </div>
