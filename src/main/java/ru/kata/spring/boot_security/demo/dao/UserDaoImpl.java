@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import ru.kata.spring.boot_security.demo.model.Role;
@@ -28,10 +29,11 @@ public class UserDaoImpl implements UserDao {
 
     @Autowired
     private EntityManager em;
-
+    private final BCryptPasswordEncoder passwordEncoder;
     private final RoleDao roleDao;
 
-    public UserDaoImpl(RoleDao roleDao) {
+    public UserDaoImpl(BCryptPasswordEncoder passwordEncoder, RoleDao roleDao) {
+        this.passwordEncoder = passwordEncoder;
         this.roleDao = roleDao;
     }
 
@@ -49,6 +51,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user, String role) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<User> userList = getAllUsers();
         for (User u : userList) {
             if (Objects.equals(u.getUsername(), user.getUsername())) {

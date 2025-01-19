@@ -101,22 +101,20 @@ public class AdminController {
         return "addUser";
     }
 
-    @RequestMapping(value = "/saveUser")
-   // public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
-        public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
-        System.out.println("======SAVE_USER: USER - name - "+user.getUsername()+", enabled - "+user.getEnabled()+" , MESSAGE - "+message+" , ROLE - "+role);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.saveUser(user,  role);
-        return "redirect:/admin";
-    }
+//    @RequestMapping(value = "/saveUser")
+//        public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
+//        System.out.println("======SAVE_USER: USER - name - "+user.getUsername()+", enabled - "+user.getEnabled()+" , MESSAGE - "+message+" , ROLE - "+role);
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        userService.saveUser(user,  role);
+//        return "redirect:/admin";
+//    }
 
-    @RequestMapping(value = "/updateUser")
-    public String updateUser(@RequestParam("user") User user, Model model) {
-//        User user = userService.getUser(username);
-        model.addAttribute("user", user);
-        model.addAttribute("message", "Update User");
-        return "#exampleModalEdit";
-    }
+//    @RequestMapping(value = "/updateUser")
+//    public String updateUser(@RequestParam("user") User user, Model model) {
+//        model.addAttribute("user", user);
+//        model.addAttribute("message", "Update User");
+//        return "#exampleModalEdit";
+//    }
 
     @RequestMapping(value = "/deleteUser")
     public String deleteUser(@RequestParam("username") String username, Model model) {

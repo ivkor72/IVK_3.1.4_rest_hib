@@ -9,7 +9,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <title>Admin page</title>
+    <title>USERS</title>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -209,7 +209,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        <input type="submit" class="btn btn-success" value="Сохранить"/>
+                        <input type="submit" id="upd" class="btn btn-success" value="Сохранить"/>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,7 @@
 <script type="text/javascript">
 
 
-    const applicantForm = document.getElementById('editForm')
+    const applicantForm = document.getElementById('editForm.upd')
     applicantForm.addEventListener('submit', handleFormSubmit)
 
     function serializeForm(formID) {
