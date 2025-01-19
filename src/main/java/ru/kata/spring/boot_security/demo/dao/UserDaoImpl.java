@@ -48,7 +48,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveUser(User user, String message, String role) {
+    public void saveUser(User user, String role) {
         List<User> userList = getAllUsers();
         for (User u : userList) {
             if (Objects.equals(u.getUsername(), user.getUsername())) {

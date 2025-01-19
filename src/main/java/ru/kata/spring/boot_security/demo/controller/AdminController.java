@@ -106,7 +106,7 @@ public class AdminController {
         public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
         System.out.println("======SAVE_USER: USER - name - "+user.getUsername()+", enabled - "+user.getEnabled()+" , MESSAGE - "+message+" , ROLE - "+role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.saveUser(user, message, role);
+        userService.saveUser(user,  role);
         return "redirect:/admin";
     }
 

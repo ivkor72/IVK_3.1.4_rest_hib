@@ -62,7 +62,7 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <p><strong>Все пользователи</strong></p>
-                    <table>
+                    <table id="allUsersTable">
                         <tr>
                             <th width="200 px" height="50 px">Имя пользователя</th>
                             <th width="200 px" height="50 px">Доступ</th>
@@ -79,7 +79,7 @@
                                 <td>
                                     <form th:action="@{/updateUser}" th:object="${user}">
 
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        <button id="editButton" type="button" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#exampleModalEdit">Изменить
                                         </button>
                                     </form>
@@ -165,7 +165,7 @@
 
 <!-- окно редактирования пользователя -->
 <div class="editForm">
-    <form class="col-3" th:action="@{/saveUser}" th:method="PATCH">
+    <form class="col-3" th:action="@{/saveUser}" th:method="PUT">
         <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -216,6 +216,31 @@
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+
+
+    const applicantForm = document.getElementById('editForm')
+    applicantForm.addEventListener('submit', handleFormSubmit)
+
+    function serializeForm(formID) {
+        console.log(Array.from(data.entries()))
+        return new FormData(formID)
+    }
+
+    async function sendData(data) {
+        return await fetch('/api/users', {
+            method: 'PUT',
+            body: data,
+        })
+    }
+    async function handleFormSubmit(event) {
+        event.preventDefault()
+
+        const data = serializeForm(event.target)
+        const response = await sendData(data)
+    }
+</script>
 
 </body>
 </html>
