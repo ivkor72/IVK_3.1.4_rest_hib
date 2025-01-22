@@ -70,12 +70,18 @@ public class MyRestController {
     }
 
     @PutMapping("/users")
-    public User updateUser(User user, String role) {
+    public ModelAndView updateUser(User user, String role) {
         ModelAndView mav = new ModelAndView("/users");
         userService.saveUser(user, role);
-        ModelMap model = new ModelMap();
-        showAllUsers(model);
-        return user;
+//        ModelMap model = new ModelMap();
+//        showAllUsers(model);
+        return mav;
     }
 
+    @DeleteMapping("/users")
+    public ModelAndView deleteUser(String username) {
+        ModelAndView mav = new ModelAndView("/users");
+        userService.deleteUser(username);
+        return mav;
+    }
 }
