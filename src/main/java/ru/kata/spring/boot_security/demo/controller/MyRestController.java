@@ -18,7 +18,9 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class MyRestController {
@@ -35,32 +37,36 @@ public class MyRestController {
         this.roleDao = roleDao;
     }
 
-    @GetMapping("/users")
-    public ModelAndView showAllUsers(ModelMap model) {
-        List<User> users = userService.getAllUsers();
-        ModelAndView mav = new ModelAndView("/users");
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentusername = authentication.getName();
-        User currentuser = userService.getUser(currentusername);
-        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
-        model.addAttribute("currentusername", currentusername);
-        model.addAttribute("currentuserroles", currentuserroles);
-        List<String> messages = new ArrayList<>();
-        List<User> allUsers = userService.getAllUsers();
-        List<Role> roles = new ArrayList<>();
-        List<AdminController.UsersAndRoles> usersAndRoles = new ArrayList<>();
-        for (User user : allUsers) {
-            roles = roleDao.findRolesByUser(user.getUsername());
-            usersAndRoles.add(new AdminController.UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
+        @GetMapping("/users")
+        public ResponseEntity<List<User>> apiGetAllUsers() {
+            List<User> users = userService.getAllUsers();
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
-        model.addAttribute("usersAndRoles", usersAndRoles);
-        User user = new User();
-        model.addAttribute("user", user);
-        Role role = new Role();
-        model.addAttribute("role", role);
-        return mav;
-    }
+//        List<User> users = userService.getAllUsers();
+//        ModelAndView mav = new ModelAndView("/users");
+//
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentusername = authentication.getName();
+//        User currentuser = userService.getUser(currentusername);
+//        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
+//        model.addAttribute("currentusername", currentusername);
+//        model.addAttribute("currentuserroles", currentuserroles);
+//        List<String> messages = new ArrayList<>();
+//        List<User> allUsers = userService.getAllUsers();
+//        List<Role> roles = new ArrayList<>();
+//        List<AdminController.UsersAndRoles> usersAndRoles = new ArrayList<>();
+//        for (User user : allUsers) {
+//            roles = roleDao.findRolesByUser(user.getUsername());
+//            usersAndRoles.add(new AdminController.UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
+//        }
+//        model.addAttribute("usersAndRoles", usersAndRoles);
+//        User user = new User();
+//        model.addAttribute("user", user);
+//        Role role = new Role();
+//        model.addAttribute("role", role);
+//        return mav;
+
 
 
     @GetMapping("/findByUsername")

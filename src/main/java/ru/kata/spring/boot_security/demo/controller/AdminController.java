@@ -89,7 +89,7 @@ public class AdminController {
         model.addAttribute("user", user);
         Role role = new Role();
         model.addAttribute("role", role);
-        return "show";
+        return "users";
     }
 
     @RequestMapping(value = "/addUser")
