@@ -70,25 +70,25 @@ public class AdminController {
     }
     @GetMapping(value = "/admin")
     public String showAllUsers(ModelMap model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentusername = authentication.getName();
-        User currentuser = userService.getUser(currentusername);
-        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
-        model.addAttribute("currentusername", currentusername);
-        model.addAttribute("currentuserroles", currentuserroles);
-        List<String> messages = new ArrayList<>();
-        List<User> allUsers = userService.getAllUsers();
-        List<Role> roles = new ArrayList<>();
-        List<UsersAndRoles> usersAndRoles = new ArrayList<>();
-        for (User user : allUsers) {
-            roles = roleDao.findRolesByUser(user.getUsername());
-            usersAndRoles.add(new UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
-        }
-        model.addAttribute("usersAndRoles", usersAndRoles);
-        User user = new User();
-        model.addAttribute("user", user);
-        Role role = new Role();
-        model.addAttribute("role", role);
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentusername = authentication.getName();
+//        User currentuser = userService.getUser(currentusername);
+//        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
+//        model.addAttribute("currentusername", currentusername);
+//        model.addAttribute("currentuserroles", currentuserroles);
+//        List<String> messages = new ArrayList<>();
+//        List<User> allUsers = userService.getAllUsers();
+//        List<Role> roles = new ArrayList<>();
+//        List<UsersAndRoles> usersAndRoles = new ArrayList<>();
+//        for (User user : allUsers) {
+//            roles = roleDao.findRolesByUser(user.getUsername());
+//            usersAndRoles.add(new UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
+//        }
+//        model.addAttribute("usersAndRoles", usersAndRoles);
+//        User user = new User();
+//        model.addAttribute("user", user);
+//        Role role = new Role();
+//        model.addAttribute("role", role);
         return "users";
     }
 
