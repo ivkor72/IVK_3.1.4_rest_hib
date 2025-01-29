@@ -1,3 +1,6 @@
+// Content-Type: 'text/javascript'
+
+
 $(async function () {
     await getTableWithUsers();
     getNewUserForm();

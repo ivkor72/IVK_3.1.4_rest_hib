@@ -38,11 +38,24 @@ public class MyRestController {
     }
 
 
-        @GetMapping("/users")
-        public ResponseEntity<List<User>> apiGetAllUsers() {
-            List<User> users = userService.getAllUsers();
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
+//        @GetMapping("/users")
+//        public ResponseEntity<List<User>> apiGetAllUsers() {
+//            List<User> users = userService.getAllUsers();
+//            return new ResponseEntity<>(users, HttpStatus.OK);
+//        }
+
+    @GetMapping("/users")
+    public ModelAndView  apiGetAllUsers() {
+        List<User> users = userService.getAllUsers();
+        ResponseEntity<List<User>> response = new ResponseEntity<>(users, HttpStatus.OK);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("users", response.getBody());
+        modelAndView.setViewName("users");
+        return modelAndView;
+    }
+
+
+
 //        List<User> users = userService.getAllUsers();
 //        ModelAndView mav = new ModelAndView("/users");
 //
