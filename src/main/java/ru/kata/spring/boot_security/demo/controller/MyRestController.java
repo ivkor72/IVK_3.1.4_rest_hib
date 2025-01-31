@@ -38,69 +38,41 @@ public class MyRestController {
     }
 
 
-//        @GetMapping("/users")
-//        public ResponseEntity<List<User>> apiGetAllUsers() {
-//            List<User> users = userService.getAllUsers();
-//            return new ResponseEntity<>(users, HttpStatus.OK);
-//        }
-
-    @GetMapping("/users")
-    public ModelAndView  apiGetAllUsers() {
-        List<User> users = userService.getAllUsers();
-        ResponseEntity<List<User>> response = new ResponseEntity<>(users, HttpStatus.OK);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("users", response.getBody());
-        modelAndView.setViewName("users");
-        return modelAndView;
-    }
+        @GetMapping("/users")
+        public List<User> apiGetAllUsers() {
+            List<User> users = userService.getAllUsers();
+            System.out.println(users);
+            return users;
+        }
 
 
 
-//        List<User> users = userService.getAllUsers();
-//        ModelAndView mav = new ModelAndView("/users");
+
+
+
+
+
+
+
+//    @GetMapping("/findByUsername")
+//    public User showUserByUsername(String username) {
+//        User user = userService.findByUsername(username);
+//        return user;
+//    }
 //
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentusername = authentication.getName();
-//        User currentuser = userService.getUser(currentusername);
-//        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
-//        model.addAttribute("currentusername", currentusername);
-//        model.addAttribute("currentuserroles", currentuserroles);
-//        List<String> messages = new ArrayList<>();
-//        List<User> allUsers = userService.getAllUsers();
-//        List<Role> roles = new ArrayList<>();
-//        List<AdminController.UsersAndRoles> usersAndRoles = new ArrayList<>();
-//        for (User user : allUsers) {
-//            roles = roleDao.findRolesByUser(user.getUsername());
-//            usersAndRoles.add(new AdminController.UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
-//        }
-//        model.addAttribute("usersAndRoles", usersAndRoles);
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        Role role = new Role();
-//        model.addAttribute("role", role);
+//    @PutMapping("/users")
+//    public ModelAndView updateUser(User user, String role) {
+//        ModelAndView mav = new ModelAndView("/users");
+//        userService.saveUser(user, role);
+////        ModelMap model = new ModelMap();
+////        showAllUsers(model);
 //        return mav;
-
-
-
-    @GetMapping("/findByUsername")
-    public User showUserByUsername(String username) {
-        User user = userService.findByUsername(username);
-        return user;
-    }
-
-    @PutMapping("/users")
-    public ModelAndView updateUser(User user, String role) {
-        ModelAndView mav = new ModelAndView("/users");
-        userService.saveUser(user, role);
-//        ModelMap model = new ModelMap();
-//        showAllUsers(model);
-        return mav;
-    }
-
-    @DeleteMapping("/users")
-    public ModelAndView deleteUser(String username) {
-        ModelAndView mav = new ModelAndView("/users");
-        userService.deleteUser(username);
-        return mav;
-    }
+//    }
+//
+//    @DeleteMapping("/users")
+//    public ModelAndView deleteUser(String username) {
+//        ModelAndView mav = new ModelAndView("/users");
+//        userService.deleteUser(username);
+//        return mav;
+//    }
 }

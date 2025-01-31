@@ -10,11 +10,11 @@ $(async function () {
 
 
 const userFetchService = {
-    head: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Referer': null
-    },
+    // head: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //     'Referer': null
+    // },
     // bodyAdd : async function(user) {return {'method': 'POST', 'headers': this.head, 'body': user}},
     findAllUsers: async () => await fetch('api/users'),
     findOneUser: async (username) => await fetch(`api/users/${username}`),
