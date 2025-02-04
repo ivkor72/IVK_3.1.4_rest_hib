@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
@@ -16,13 +17,14 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.persistence.EntityManager;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin/api")
 public class MyRestController {
 
     @Autowired
@@ -45,12 +47,17 @@ public class MyRestController {
             return users;
         }
 
+    @GetMapping("/users/{username}")
+    public User apiGetOneUser(@PathVariable String username) {
+        User user = userService.findByUsername(username);
+        return user;
+    }
 
-
-
-
-
-
+//    @GetMapping("/users/{username}")
+//    public ResponseEntity<User> apiGetOneUser(@PathVariable("username") String username) {
+//        User user = userService.findByUsername(username);
+//        return new ResponseEntity<>(user, HttpStatus.OK);
+//    }
 
 
 
@@ -59,6 +66,8 @@ public class MyRestController {
 //        User user = userService.findByUsername(username);
 //        return user;
 //    }
+
+
 //
 //    @PutMapping("/users")
 //    public ModelAndView updateUser(User user, String role) {

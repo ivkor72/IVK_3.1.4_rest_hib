@@ -10,14 +10,14 @@ $(async function () {
 
 
 const userFetchService = {
-    // head: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //     'Referer': null
-    // },
+    head: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Referer': null
+    },
     // bodyAdd : async function(user) {return {'method': 'POST', 'headers': this.head, 'body': user}},
-    findAllUsers: async () => await fetch('api/users'),
-    findOneUser: async (username) => await fetch(`api/users/${username}`),
+    findAllUsers: async () => await fetch('admin/api/users'),
+    findOneUser: async (username) => await fetch(`admin/api/users/${username}`),
     addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
     updateUser: async (user, username) => await fetch(`api/users/${username}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
     deleteUser: async (username) => await fetch(`api/users/${username}`, {method: 'DELETE', headers: userFetchService.head})
@@ -34,15 +34,15 @@ async function getTableWithUsers() {
                 let tableFilling = `$(
                         <tr>
                            
-                            <td>${user.userName}</td>
+                            <td>${user.username}</td>
                             <td>${user.password.slice(0, 15)}...</td>
                             <td>${user.enabled}</td>     
                             <td>
-                                <button type="button" data-userid="${user.userName}" data-action="edit" class="btn btn-outline-secondary" 
+                                <button type="button" data-userid="${user.username}" data-action="edit" class="btn btn-outline-secondary" 
                                 data-toggle="modal" data-target="#someDefaultModal"></button>
                             </td>
                             <td>
-                                <button type="button" data-userid="${user.userName}" data-action="delete" class="btn btn-outline-danger" 
+                                <button type="button" data-userid="${user.username}" data-action="delete" class="btn btn-outline-danger" 
                                 data-toggle="modal" data-target="#someDefaultModal"></button>
                             </td>
                         </tr>
@@ -55,12 +55,11 @@ async function getTableWithUsers() {
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
         let defaultModal = $('#someDefaultModal');
-
         let targetButton = $(event.target);
-        let buttonUsername = targetButton.attr('data-username');
+        let buttonUsername = targetButton.attr('data-userid');
         let buttonAction = targetButton.attr('data-action');
 
-        defaultModal.attr('data-username', buttonUsername);
+        defaultModal.attr('data-userid', buttonUsername);
         defaultModal.attr('data-action', buttonAction);
         defaultModal.modal('show');
     })
@@ -93,7 +92,7 @@ async function getDefaultModal() {
         show: false
     }).on("show.bs.modal", (event) => {
         let thisModal = $(event.target);
-        let username = thisModal.attr('data-username');
+        let username = thisModal.attr('data-id');
         let action = thisModal.attr('data-action');
         switch (action) {
             case 'edit':
@@ -127,9 +126,9 @@ async function editUser(modal, username) {
     user.then(user => {
         let bodyForm = `
             <form class="form-group" id="editUser">
-<!--            <input type="text" class="form-control" id="id" name="id" value="${user.id}" disabled><br>-->
-                <input class="form-control" type="text" id="login" value="${user.userName}"><br>
-                <input class="form-control" type="password" id="password"><br>
+
+                <input class="form-control" type="text" id="login" value="${user.username}"><br>
+                <input class="form-control" type="password" id="password" value="${user.password}"><br>
                 <input class="form-control" id="enabled" type="number" value="${user.enabled}">
             </form>
         `;
