@@ -19,7 +19,7 @@ const userFetchService = {
     findAllUsers: async () => await fetch('admin/api/users'),
     findOneUser: async (username) => await fetch(`admin/api/users/${username}`),
     addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
-    updateUser: async (user, username) => await fetch(`api/users/${username}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
+    updateUser: async (user, username) => await fetch(`admin/api/users/${username}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
     deleteUser: async (username) => await fetch(`api/users/${username}`, {method: 'DELETE', headers: userFetchService.head})
 }
 
@@ -38,12 +38,12 @@ async function getTableWithUsers() {
                             <td>${user.password.slice(0, 15)}...</td>
                             <td>${user.enabled}</td>     
                             <td>
-                                <button type="button" data-userid="${user.username}" data-action="edit" class="btn btn-outline-secondary" 
-                                data-toggle="modal" data-target="#someDefaultModal"></button>
+                                <button type="button"  id="editButton1" data-userid="${user.username}" data-action="edit" class="btn btn-outline-secondary" 
+                                data-toggle="modal" data-target="#exampleModalEdit"></button>
                             </td>
                             <td>
                                 <button type="button" data-userid="${user.username}" data-action="delete" class="btn btn-outline-danger" 
-                                data-toggle="modal" data-target="#someDefaultModal"></button>
+                                data-toggle="modal" data-target="#exampleModalDelete"></button>
                             </td>
                         </tr>
                 )`;
@@ -54,12 +54,12 @@ async function getTableWithUsers() {
     // обрабатываем нажатие на любую из кнопок edit или delete
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
-        let defaultModal = $('#someDefaultModal');
-        let targetButton = $(event.target);
-        let buttonUsername = targetButton.attr('data-userid');
+        let defaultModal = $('#exampleModalEdit');
+        let targetButton = $('#editButton1');
+        let buttonUserId = targetButton.attr('data-userid');
         let buttonAction = targetButton.attr('data-action');
 
-        defaultModal.attr('data-userid', buttonUsername);
+        defaultModal.attr('data-userid', buttonUserId);
         defaultModal.attr('data-action', buttonAction);
         defaultModal.modal('show');
     })
@@ -86,20 +86,20 @@ async function getNewUserForm() {
 // что то деалем при открытии модалки и при закрытии
 // основываясь на ее дата атрибутах
 async function getDefaultModal() {
-    $('#someDefaultModal').modal({
+    $('#exampleModalEdit').modal({
         keyboard: true,
         backdrop: "static",
         show: false
     }).on("show.bs.modal", (event) => {
         let thisModal = $(event.target);
-        let username = thisModal.attr('data-id');
+        let userId = thisModal.attr('data-id');
         let action = thisModal.attr('data-action');
         switch (action) {
             case 'edit':
-                editUser(thisModal, username);
+                editUser(thisModal, userId);
                 break;
             case 'delete':
-                deleteUser(thisModal, username);
+                deleteUser(thisModal, userId);
                 break;
         }
     }).on("hidden.bs.modal", (e) => {
@@ -118,7 +118,7 @@ async function editUser(modal, username) {
 
     modal.find('.modal-title').html('Edit user');
 
-    let editButton = `<button  class="btn btn-outline-success" id="editButton">Edit</button>`;
+    let editButton = `<button  class="btn btn-outline-success" id="editButton" value="${user.username}">Edit</button>`;
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
     modal.find('.modal-footer').append(editButton);
     modal.find('.modal-footer').append(closeButton);
@@ -126,10 +126,12 @@ async function editUser(modal, username) {
     user.then(user => {
         let bodyForm = `
             <form class="form-group" id="editUser">
-
+                <label  for="login">Login</label>
                 <input class="form-control" type="text" id="login" value="${user.username}"><br>
+                <label  for="password">Password</label>
                 <input class="form-control" type="password" id="password" value="${user.password}"><br>
-                <input class="form-control" id="enabled" type="number" value="${user.enabled}">
+                <label  for="enabled">Enabled</label>
+                <input class="form-control" id="enabled" type="text" value="${user.enabled}">
             </form>
         `;
         modal.find('.modal-body').append(bodyForm);
@@ -137,12 +139,12 @@ async function editUser(modal, username) {
 
     $("#editButton").on('click', async () => {
         // let id = modal.find("#id").val().trim();
-        let login = modal.find("#login").val().trim();
+        let username = modal.find("#login").val().trim();
         let password = modal.find("#password").val().trim();
-        let age = modal.find("#enabled").val().trim();
+        let enabled = modal.find("#enabled").val().trim();
         let data = {
             // id: id,
-            username: login,
+            username: username,
             password: password,
             enabled: enabled
         }
@@ -166,8 +168,8 @@ async function editUser(modal, username) {
 
 
 // удаляем юзера из модалки удаления
-async function deleteUser(modal, username) {
-    await userFetchService.deleteUser(username);
+async function deleteUser(modal, id) {
+    await userFetchService.deleteUser(id);
     getTableWithUsers();
     modal.find('.modal-title').html('');
     modal.find('.modal-body').html('User was deleted');

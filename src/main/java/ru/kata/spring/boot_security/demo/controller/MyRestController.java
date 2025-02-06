@@ -41,23 +41,30 @@ public class MyRestController {
 
 
         @GetMapping("/users")
-        public List<User> apiGetAllUsers() {
+        public ResponseEntity <List<User>> apiGetAllUsers() {
             List<User> users = userService.getAllUsers();
             System.out.println(users);
-            return users;
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
     @GetMapping("/users/{username}")
-    public User apiGetOneUser(@PathVariable String username) {
-        User user = userService.findByUsername(username);
-        return user;
+    public ResponseEntity <User> apiGetOneUser(@PathVariable String username) {
+        username = "admin";
+        User user = userService.getUser(username);
+        System.out.println("^^^^^^^^^"+username+"^^^^+"+user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-//    @GetMapping("/users/{username}")
-//    public ResponseEntity<User> apiGetOneUser(@PathVariable("username") String username) {
+    @PutMapping("/users/{username}")
+    public ResponseEntity<User> apiUpdateUser(@PathVariable("username") String username,
+                                                         @RequestBody User user) {
+        String role = "ROLE_ADMIN";
 //        User user = userService.findByUsername(username);
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-//    }
+        userService.saveUser(user, role);
+        System.out.println("===putmapping==apiUpdateUser===username="+username+" user="+user+" role="+role);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+
+    }
 
 
 
@@ -69,13 +76,11 @@ public class MyRestController {
 
 
 //
-//    @PutMapping("/users")
-//    public ModelAndView updateUser(User user, String role) {
-//        ModelAndView mav = new ModelAndView("/users");
+//    @PutMapping("/users/{username}")
+//    public ResponseEntity<User> updateUser(User user, String role) {
+//        role = "ROLE_ADMIN";
 //        userService.saveUser(user, role);
-////        ModelMap model = new ModelMap();
-////        showAllUsers(model);
-//        return mav;
+//        return new ResponseEntity<>(user, HttpStatus.OK);
 //    }
 //
 //    @DeleteMapping("/users")
