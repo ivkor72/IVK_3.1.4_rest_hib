@@ -47,21 +47,21 @@ public class MyRestController {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
-    @GetMapping("/users/{username}")
-    public ResponseEntity <User> apiGetOneUser(@PathVariable String username) {
-        username = "admin";
-        User user = userService.getUser(username);
-        System.out.println("^^^^^^^^^"+username+"^^^^+"+user);
+    @GetMapping("/users/{id}")
+    public ResponseEntity <User> apiGetOneUser(@PathVariable("id") long id) {
+
+        User user = userService.findById(id);
+        System.out.println("^^^^^^^^^"+id+"^^^^+"+user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PutMapping("/users/{username}")
-    public ResponseEntity<User> apiUpdateUser(@PathVariable("username") String username,
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> apiUpdateUser(@PathVariable("id") long id,
                                                          @RequestBody User user) {
         String role = "ROLE_ADMIN";
 //        User user = userService.findByUsername(username);
         userService.saveUser(user, role);
-        System.out.println("===putmapping==apiUpdateUser===username="+username+" user="+user+" role="+role);
+        System.out.println("===putmapping==apiUpdateUser===id="+id+" user="+user+" role="+role);
             return new ResponseEntity<>(user, HttpStatus.OK);
 
     }

@@ -1,8 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-import lombok.Setter;
-import org.hibernate.annotations.Cascade;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,24 +10,47 @@ import javax.persistence.*;
 @Table(name = "authorities")
 public class Role implements GrantedAuthority {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @PrimaryKeyJoinColumn(name = "users.username")
-    @Column(name = "username")
+    @Id
+    @PrimaryKeyJoinColumn(name = "users.id")
+    @Column(name = "id")
+    private long id;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    @Column (name = "userName")
     private String userName;
 
-    @Setter
+
+
     @Column(name = "authority")
     private String authority;
 
 
-    public Role() {
+    public Role(String username, String authority) {
 
     }
 
-    public Role(String userName, String authority) {
+    public Role(long id, String username, String authority) {
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    public Role(Long id, String userName, String authority) {
+        this.id = id;
         this.userName = userName;
         this.authority = authority;
     }

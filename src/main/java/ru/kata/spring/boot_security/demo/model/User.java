@@ -15,6 +15,9 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
+    @Column(name = "id")
+    private long id;
+
     @Column(name = "username")
     private String userName;
 
@@ -31,7 +34,16 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public User(String userName, String password, boolean enabled) {
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User(long id, String userName, String password, boolean enabled) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         this.enabled = enabled;
@@ -47,7 +59,7 @@ public class User implements UserDetails {
     }
 
     public void setUsername(String username) {
-        this.userName = userName;
+        this.userName = username;
     }
 
     public void setPassword(String password) {

@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/*", "/index", "/registration").permitAll()
+                .antMatchers("admin/api/**", "/index", "/registration").permitAll()
                 .and()
                 .formLogin().successHandler(successUserHandler)
                 .permitAll()
@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .httpBasic();
+     //   http.csrf().disable();
     }
 
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

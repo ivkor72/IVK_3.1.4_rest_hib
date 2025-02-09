@@ -17,7 +17,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -89,12 +88,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return null;
+    public User findById(long id) {
+        User user = em.find(User.class, id);
+        return user;
     }
 
-    public User findUserByUsername(String username) {
-        User user = em.find(User.class, username);
+
+    @Override
+    public User findUserById(long id) {
+        User user = em.find(User.class, id);
 
         return user;
     }
@@ -106,6 +108,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> findAll() {
         return List.of();
+    }
+
+    @Override
+    public User findUByUsername(String username) {
+        return null;
     }
 
     @Override
