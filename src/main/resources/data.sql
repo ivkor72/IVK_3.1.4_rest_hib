@@ -1,5 +1,5 @@
 CREATE TABLE  IF NOT EXISTS users (
-  id int,
+  id int AUTO_INCREMENT,
   username varchar(15),
   password varchar(100),
   enabled tinyint(1),

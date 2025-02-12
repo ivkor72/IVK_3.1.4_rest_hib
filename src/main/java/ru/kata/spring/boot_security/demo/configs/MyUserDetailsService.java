@@ -23,6 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Unknown user: " + userName);
         }
         UserDetails user = User.builder()
+                .id(myUser.getId())
                 .userName(myUser.getUsername())
                 .password(myUser.getPassword())
                 .enabled(myUser.getEnabled())

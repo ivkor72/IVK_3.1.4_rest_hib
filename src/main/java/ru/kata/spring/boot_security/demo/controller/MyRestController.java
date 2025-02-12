@@ -49,9 +49,9 @@ public class MyRestController {
 
     @GetMapping("/users/{id}")
     public ResponseEntity <User> apiGetOneUser(@PathVariable("id") long id) {
-
+        System.out.println("id= "+ id);
         User user = userService.findById(id);
-        System.out.println("^^^^^^^^^"+id+"^^^^+"+user);
+        System.out.println("user= " + user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

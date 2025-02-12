@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    @Getter
     @Id
     @Column(name = "id")
     private long id;
@@ -32,10 +34,6 @@ public class User implements UserDetails {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public void setId(long id) {

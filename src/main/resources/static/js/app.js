@@ -242,7 +242,7 @@ async function getTableWithUsers() {
                             <td>${user.password.slice(0, 15)}...</td>
                             <td>${user.enabled}</td>
                             <td>
-                                <button type="button"  id="editButton1" data-userid="${user.id}" data-action="edit" class="btn btn-outline-secondary"
+                                <button type="button"  id="editButton" data-userid="${user.id}" data-action="edit" class="btn btn-outline-secondary"
                                 data-toggle="modal" data-target="#exampleModalEdit"></button>
                             </td>
                             <td>
@@ -259,7 +259,7 @@ async function getTableWithUsers() {
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
         let defaultModal = $('#exampleModalEdit');
-        let targetButton = $('#editButton1');
+        let targetButton = $('#editButton');
         let buttonUserId = targetButton.attr('data-userid');
         let buttonAction = targetButton.attr('data-action');
 
@@ -301,6 +301,7 @@ async function getDefaultModal() {
         switch (action) {
             case 'edit':
                 editUser(thisModal, userId);
+                console.log('findOneUser - id = ', userId);
                 break;
             case 'delete':
                 deleteUser(thisModal, userId);
@@ -317,6 +318,7 @@ async function getDefaultModal() {
 
 // редактируем юзера из модалки редактирования, забираем данные, отправляем
 async function editUser(modal, id) {
+
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
 
@@ -343,7 +345,7 @@ async function editUser(modal, id) {
         modal.find('.modal-body').append(bodyForm);
     })
 
-    $("#editButton1").on('click', async () => {
+    $("#editButton").on('click', async () => {
         let id = modal.find("#id").val().trim();
         let username = modal.find("#login").val().trim();
         let password = modal.find("#password").val().trim();

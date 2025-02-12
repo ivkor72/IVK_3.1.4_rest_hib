@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +17,16 @@ public class Role implements GrantedAuthority {
     @Column(name = "id")
     private long id;
 
+    public Role() {
+
+    }
+
     public void setId(long id) {
         this.id = id;
     }
 
 
+    @Getter
     @Column (name = "userName")
     private String userName;
 
@@ -35,10 +41,6 @@ public class Role implements GrantedAuthority {
     }
 
     public Role(long id, String username, String authority) {
-    }
-
-    public String getUserName() {
-        return userName;
     }
 
     public void setUserName(String userName) {
