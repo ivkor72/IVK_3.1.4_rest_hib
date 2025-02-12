@@ -260,9 +260,13 @@ async function getTableWithUsers() {
     $("#mainTableWithUsers").find('button').on('click', (event) => {
         let defaultModal = $('#exampleModalEdit');
         let targetButton = $('#editButton');
-        let buttonUserId = targetButton.attr('data-userid');
-        let buttonAction = targetButton.attr('data-action');
 
+      //  let buttonUserId = targetButton.attr('data-userid');
+
+        let buttonUserId = $("#mainTableWithUsers").closest('#editButton').attr('data-userid');
+
+        let buttonAction = targetButton.attr('data-action');
+console.log(buttonUserId);
         defaultModal.attr('data-userid', buttonUserId);
         defaultModal.attr('data-action', buttonAction);
         defaultModal.modal('show');
@@ -321,7 +325,7 @@ async function editUser(modal, id) {
 
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
-
+console.log(user);
     modal.find('.modal-title').html('Edit user');
 
     let editButton = `<button  class="btn btn-outline-success" id="editButton" value="${user.id}">Edit</button>`;
@@ -337,7 +341,7 @@ async function editUser(modal, id) {
                 <label  for="login">Login</label>
                 <input class="form-control" type="text" id="login" value="${user.username}"><br>
                 <label  for="password">Password</label>
-                <input class="form-control" type="password" id="password" value="${user.password}"><br>
+                <input class="form-control" type="password" id="password" value="${user.password}" autocomplete="off"><br>
                 <label  for="enabled">Enabled</label>
                 <input class="form-control" id="enabled" type="text" value="${user.enabled}">
             </form>
@@ -390,12 +394,12 @@ async function addNewUser() {
     $('#addNewUserButton').click(async () =>  {
         let addUserForm = $('#defaultSomeForm')
         let id = addUserForm.find('#AddNewUserId').val().trim();
-        let login = addUserForm.find('#AddNewUserLogin').val().trim();
+        let username = addUserForm.find('#AddNewUserLogin').val().trim();
         let password = addUserForm.find('#AddNewUserPassword').val().trim();
         let enabled = addUserForm.find('#AddNewUserEnabled').val().trim();
         let data = {
             id: id,
-            username: login,
+            username: username,
             password: password,
             enabled: enabled
         }

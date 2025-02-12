@@ -96,7 +96,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return userName + " " + password;
+        return "username= "+userName + ", id= "+id+ ",pass= " + password;
     }
 
     public boolean getEnabled() {
