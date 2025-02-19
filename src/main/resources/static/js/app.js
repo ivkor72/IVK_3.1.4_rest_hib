@@ -234,23 +234,41 @@ async function getTableWithUsers() {
     await userFetchService.findAllUsers()
         .then(res => res.json())
         .then(users => {
+
             users.forEach(user => {
+
+
+                let uid = user.id;
+                let idEditButton = uid.toString();
                 let tableFilling = `$(
+                        
                         <tr>
+                            
+                     
                             <td>${user.id}</td>
                             <td>${user.username}</td>
                             <td>${user.password.slice(0, 15)}...</td>
                             <td>${user.enabled}</td>
+                            
+                            
                             <td>
-                                <button type="button"  id="editButton" data-userid="${user.id}" data-action="edit" class="btn btn-outline-secondary"
+                                <button type="button"  id=idEditButton data-userid="${user.id}" data-action="edit" class="btn btn-outline-secondary"
                                 data-toggle="modal" data-target="#exampleModalEdit"></button>
                             </td>
                             <td>
                                 <button type="button" data-userid="${user.id}" data-action="delete" class="btn btn-outline-danger"
                                 data-toggle="modal" data-target="#exampleModalDelete"></button>
                             </td>
+                      
                         </tr>
+                        
                 )`;
+
+                console.log("uid= ",uid);
+
+
+                console.log("data-userid= ",$(idEditButton).attr('data-userid'));
+                console.log("##########")
                 table.append(tableFilling);
             })
         })
@@ -259,14 +277,11 @@ async function getTableWithUsers() {
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
         let defaultModal = $('#exampleModalEdit');
-        let targetButton = $('#editButton');
+        let targetButton = $(event.target);
 
-      //  let buttonUserId = targetButton.attr('data-userid');
-
-        let buttonUserId = $("#mainTableWithUsers").closest('#editButton').attr('data-userid');
-
+        let buttonUserId = targetButton.attr('data-userid')
         let buttonAction = targetButton.attr('data-action');
-console.log(buttonUserId);
+console.log("buttonUserId= ", buttonUserId);
         defaultModal.attr('data-userid', buttonUserId);
         defaultModal.attr('data-action', buttonAction);
         defaultModal.modal('show');
@@ -301,6 +316,8 @@ async function getDefaultModal() {
     }).on("show.bs.modal", (event) => {
         let thisModal = $(event.target);
         let userId = thisModal.attr('data-userid');
+        console.log("@@@");
+        console.log(userId);
         let action = thisModal.attr('data-action');
         switch (action) {
             case 'edit':
@@ -322,7 +339,8 @@ async function getDefaultModal() {
 
 // редактируем юзера из модалки редактирования, забираем данные, отправляем
 async function editUser(modal, id) {
-
+    console.log("@@@");
+    console.log(id);
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
 console.log(user);
