@@ -36,6 +36,10 @@ public class RoleDaoImpl implements RoleDao {
         em.flush();
     }
 
+    @Override
+    public String findRoleByUsername(String username) {
+        return (em.find(Role.class, username)).getAuthority();
+    }
 
     @Override
     public List<Role> findRolesByUser(String userName) {

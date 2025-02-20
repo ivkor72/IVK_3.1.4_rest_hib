@@ -153,85 +153,107 @@
 </div>
 
 
-<!--модальное окно редактирования пользователя -->
-<div class="myEditForm">
-    <form class="col-3" >
-        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabelEdit" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelEdit">Редактирование</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+<!--&lt;!&ndash;модальное окно редактирования пользователя &ndash;&gt;-->
+<!--<div class="myEditForm">-->
+<!--    <form class="col-3" >-->
+<!--        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"-->
+<!--             aria-labelledby="exampleModalLabelEdit" aria-hidden="true">-->
+<!--            <div class="modal-dialog" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="exampleModalLabelEdit">Редактирование</h5>-->
+<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span aria-hidden="true">&times;</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+
+<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="username1" class="col-form-label">Логин:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input name="username" type="text" id="username1">&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="password1" class="col-form-label">Пароль:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="password" class="form-control" id="password1" name="password" autocomplete="on">&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <label for="enabled1" class="col-form-label">Доступ:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" class="form-control" id="enabled1" name="enabled">&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                        <div class="d-flex flex-row bd-highlight">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="roles1">Роли</label>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                <select class="custom-select bd-primary" multiple name="roles1" id="roles1">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="ROLE_USER">USER</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="ROLE_ADMIN">ADMIN</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--&lt;!&ndash;                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="submit" id="upd" class="btn btn-success" value="Сохранить"/>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Модальное окно по удалению пользователя &ndash;&gt;-->
+<!--<div class="myDeleteForm">-->
+<!--    <form>-->
+<!--        <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">-->
+<!--            <div class="modal-dialog" role="document">-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <h5 class="modal-title" id="exampleModalLabelDelete">Удаление</h5>-->
+<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                            <span aria-hidden="true">&times;</span>-->
+<!--                        </button>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
 
 <!--                        <div class="form-group">-->
-<!--                            <label for="username1" class="col-form-label">Логин:</label>-->
-<!--                            <input name="username" type="text" id="username1">-->
+<!--                            <label for="userName2" class="col-form-label">Логин:</label>-->
+<!--                            <input name="userName" type="text" id="userName2">-->
 <!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="password1" class="col-form-label">Пароль:</label>-->
-<!--                            <input type="password" class="form-control" id="password1" name="password" autocomplete="on">-->
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="enabled1" class="col-form-label">Доступ:</label>-->
-<!--                            <input type="text" class="form-control" id="enabled1" name="enabled">-->
-<!--                        </div>-->
-
-<!--                        <div class="d-flex flex-row bd-highlight">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="roles1">Роли</label>-->
-
-<!--                                <select class="custom-select bd-primary" multiple name="roles1" id="roles1">-->
-<!--                                    <option value="ROLE_USER">USER</option>-->
-<!--                                    <option value="ROLE_ADMIN">ADMIN</option>-->
-<!--                                </select>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-
-                    </div>
-                    <div class="modal-footer">
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
 <!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>-->
-<!--                        <input type="submit" id="upd" class="btn btn-success" value="Сохранить"/>-->
-                    </div>
-                </div>
+<!--                        <input type="submit" class="btn btn-danger" value="Удалить"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--    </form>-->
+<!--</div>-->
+
+<!--скрытое дефолтное модальное окно -->
+<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-        </div>
-    </form>
-</div>
 
-<!-- Модальное окно по удалению пользователя -->
-<div class="myDeleteForm">
-    <form>
-        <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelDelete">Удаление</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="userName2" class="col-form-label">Логин:</label>
-                            <input name="userName" type="text" id="userName2">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                        <input type="submit" class="btn btn-danger" value="Удалить"/>
-                    </div>
-                </div>
+            <div class="modal-body">
             </div>
-        </div>
 
-    </form>
+            <div class="modal-footer">
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <!--<script src="webjars/jquery/3.5.1/jquery.js"></script>-->

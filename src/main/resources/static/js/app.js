@@ -276,7 +276,7 @@ async function getTableWithUsers() {
     // обрабатываем нажатие на любую из кнопок edit или delete
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
-        let defaultModal = $('#exampleModalEdit');
+        let defaultModal = $('#someDefaultModal');
         let targetButton = $(event.target);
 
         let buttonUserId = targetButton.attr('data-userid')
@@ -309,7 +309,7 @@ async function getNewUserForm() {
 // что то деалем при открытии модалки и при закрытии
 // основываясь на ее дата атрибутах
 async function getDefaultModal() {
-    $('#exampleModalEdit').modal({
+    $('#someDefaultModal').modal({
         keyboard: true,
         backdrop: "static",
         show: false
@@ -343,7 +343,7 @@ async function editUser(modal, id) {
     console.log(id);
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
-console.log(user);
+console.log("user= ",user);
     modal.find('.modal-title').html('Edit user');
 
     let editButton = `<button  class="btn btn-outline-success" id="editButton" value="${user.id}">Edit</button>`;
@@ -374,10 +374,11 @@ console.log(user);
         let enabled = modal.find("#enabled").val().trim();
         let data = {
             id: id,
-            username: username,
+            userName: username,
             password: password,
             enabled: enabled
         }
+        console.log("for userFechService: data= ",data, "id= ", id)
         const response = await userFetchService.updateUser(data, id);
 
         if (response.ok) {

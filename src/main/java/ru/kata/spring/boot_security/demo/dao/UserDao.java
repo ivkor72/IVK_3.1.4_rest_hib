@@ -28,4 +28,5 @@ public interface UserDao extends JpaRepository<User, Long> {
 
    public User findUByUsername(String username);
 
+    public  void updateUser(User user);
 }

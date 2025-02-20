@@ -116,6 +116,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void updateUser(User user) {
+        String role = roleDao.findRoleByUsername(user.getUsername());
+        saveUser(user, role);
+    }
+
+    @Override
     public List<User> findAll(Sort sort) {
         return List.of();
     }

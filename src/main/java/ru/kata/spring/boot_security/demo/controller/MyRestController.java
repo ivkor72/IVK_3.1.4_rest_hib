@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.dao.RoleDao;
+import ru.kata.spring.boot_security.demo.exceptionHandler.DataInfoHandler;
+import ru.kata.spring.boot_security.demo.exceptionHandler.UserWithSuchLoginExist;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -21,6 +24,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -56,17 +60,29 @@ public class MyRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> apiUpdateUser(@PathVariable("id") long id,
-                                                         @RequestBody User user) {
-        String role = "ROLE_ADMIN";
-//        User user = userService.findByUsername(username);
-        userService.saveUser(user, role);
-        System.out.println("===putmapping==apiUpdateUser===id="+id+" user="+user+" role="+role);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-
+    public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable("id") long id,
+                                                         @RequestBody @Valid User user,
+                                                         BindingResult bindingResult) {
+        System.out.println("UPDATE  id= "+ id + "user= " + user);
+        if (bindingResult.hasErrors()) {
+            String error = getErrorsFromBindingResult(bindingResult);
+            return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
+        }
+        try {
+            userService.updateUser(user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            throw new UserWithSuchLoginExist("User with such login Exist");
+        }
     }
 
 
+    private String getErrorsFromBindingResult(BindingResult bindingResult) {
+        return bindingResult.getFieldErrors()
+                .stream()
+                .map(x -> x.getDefaultMessage())
+                .collect(Collectors.joining("; "));
+    }
 
 //    @GetMapping("/findByUsername")
 //    public User showUserByUsername(String username) {
