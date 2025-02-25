@@ -13,4 +13,6 @@ public interface RoleDao {
     public void deleteRole(String username, String authority);
 
     public String findRoleByUsername(String username);
+
+    public  String findRoleByIdy(long id);
 }

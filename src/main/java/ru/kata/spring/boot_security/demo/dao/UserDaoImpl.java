@@ -72,17 +72,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void deleteUser(String username) {
+    public void deleteUser(long id) {
         List <Role> roles = em.createQuery("from Role", Role.class).getResultList();
         for (Role userR : roles) {
-            if (userR.getUsername().equals(username)) {
+            if (userR.getId().equals(id)) {
                 em.remove(userR);
             }
         };
 
             em.flush();
 
-        User user = em.find(User.class, username);
+        User user = em.find(User.class, id);
         em.remove(user);
         em.flush();
     }
@@ -116,8 +116,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(User user) {
-        String role = roleDao.findRoleByUsername(user.getUsername());
+    public void updateUser(long id) {
+        User user = em.find(User.class, id);
+        String role = roleDao.findRoleByIdy(user.getId());
         saveUser(user, role);
     }
 

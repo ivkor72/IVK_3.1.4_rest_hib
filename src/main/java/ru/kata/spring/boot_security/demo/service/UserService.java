@@ -13,11 +13,11 @@ public interface UserService {
 
     public User getUser(String username);
 
-    public void deleteUser(String username);
+    public void deleteUser(long id);
 
     public User findById(long id);
 
     public User findByUsername(String username);
 
-    public void updateUser(User user);
+    public void updateUser(long id);
 }

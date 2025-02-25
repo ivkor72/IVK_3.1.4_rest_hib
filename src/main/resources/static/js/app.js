@@ -222,9 +222,9 @@ const userFetchService = {
     // bodyAdd : async function(user) {return {'method': 'POST', 'headers': this.head, 'body': user}},
     findAllUsers: async () => await fetch('admin/api/users'),
     findOneUser: async (id) => await fetch(`admin/api/users/${id}`),
-    addNewUser: async (user) => await fetch('api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
+    addNewUser: async (user) => await fetch('admin/api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
     updateUser: async (user, id) => await fetch(`admin/api/users/${id}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
-    deleteUser: async (id) => await fetch(`api/users/${id}`, {method: 'DELETE', headers: userFetchService.head})
+    deleteUser: async (id) => await fetch(`admin/api/users/${id}`, {method: 'DELETE', headers: userFetchService.head})
 }
 
 async function getTableWithUsers() {
@@ -368,7 +368,7 @@ console.log("user= ",user);
     })
 
     $("#editButton").on('click', async () => {
-        let id = modal.find("#id").val().trim();
+        let id = modal.find("#id").val();
         let username = modal.find("#login").val().trim();
         let password = modal.find("#password").val().trim();
         let enabled = modal.find("#enabled").val().trim();
@@ -412,7 +412,7 @@ async function deleteUser(modal, id) {
 async function addNewUser() {
     $('#addNewUserButton').click(async () =>  {
         let addUserForm = $('#defaultSomeForm')
-        let id = addUserForm.find('#AddNewUserId').val().trim();
+        let id = addUserForm.find('#AddNewUserId').val();
         let username = addUserForm.find('#AddNewUserLogin').val().trim();
         let password = addUserForm.find('#AddNewUserPassword').val().trim();
         let enabled = addUserForm.find('#AddNewUserEnabled').val().trim();

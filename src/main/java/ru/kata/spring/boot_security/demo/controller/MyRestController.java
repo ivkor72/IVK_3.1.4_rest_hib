@@ -60,7 +60,7 @@ public class MyRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable("id") long id,
+    public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable(value = "id") long id,
                                                          @RequestBody @Valid User user,
                                                          BindingResult bindingResult) {
         System.out.println("UPDATE  id= "+ id + "user= " + user);
@@ -69,11 +69,12 @@ public class MyRestController {
             return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
         }
         try {
-            userService.updateUser(user);
+            userService.updateUser(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             throw new UserWithSuchLoginExist("User with such login Exist");
         }
+
     }
 
 
@@ -82,6 +83,27 @@ public class MyRestController {
                 .stream()
                 .map(x -> x.getDefaultMessage())
                 .collect(Collectors.joining("; "));
+    }
+    @PostMapping("/users")
+    public ResponseEntity<DataInfoHandler> apiAddNewUser(@Valid @RequestBody User user,
+                                                         BindingResult bindingResult) {
+        System.out.println("ADD user= " + user);
+        if (bindingResult.hasErrors()) {
+            String error = getErrorsFromBindingResult(bindingResult);
+            return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
+        }
+        try {
+            userService.saveUser(user, "ROLE_USER");
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (DataIntegrityViolationException e) {
+            throw new UserWithSuchLoginExist("User with such login Exist");
+        }
+    }
+
+    @DeleteMapping("users/{id}")
+    public ResponseEntity<DataInfoHandler> apiDeleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
+        return new ResponseEntity<>(new DataInfoHandler("User was deleted"), HttpStatus.OK);
     }
 
 //    @GetMapping("/findByUsername")

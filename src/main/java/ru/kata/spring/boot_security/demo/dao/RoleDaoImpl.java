@@ -20,16 +20,19 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public void saveRole(String username, String authority) {
-        if (authority == null || authority.isEmpty()) {
-            return;
-        }
+        System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
         Role role = new Role(username, authority);
-        List<Role> roles = findRolesByUser(username);
-        for (Role role1 : roles) {
-            if (Objects.equals(role1.getAuthority(), authority)) {
-                return;
-            }
-        }
+        System.out.println("SAVE ROLE: role " + role);
+//        if (authority == null || authority.isEmpty()) {
+//            return;
+//        }
+//
+//        List<Role> roles = findRolesByUser(username);
+//        for (Role role1 : roles) {
+//            if (Objects.equals(role1.getAuthority(), authority)) {
+//                return;
+//            }
+//        }
 
         em.persist(role);
      //   em.merge(role);
@@ -39,6 +42,11 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public String findRoleByUsername(String username) {
         return (em.find(Role.class, username)).getAuthority();
+    }
+
+    @Override
+    public String findRoleByIdy(long id) {
+        return (em.find(Role.class, id)).getAuthority();
     }
 
     @Override

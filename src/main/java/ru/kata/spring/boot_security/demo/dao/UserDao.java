@@ -17,7 +17,7 @@ public interface UserDao extends JpaRepository<User, Long> {
 
    public User getUser(String username);
 
-   public void deleteUser(String username);
+   public void deleteUser(long id);
 
    public User findById(long id);
 
@@ -28,5 +28,5 @@ public interface UserDao extends JpaRepository<User, Long> {
 
    public User findUByUsername(String username);
 
-    public  void updateUser(User user);
+    public  void updateUser(long id);
 }
