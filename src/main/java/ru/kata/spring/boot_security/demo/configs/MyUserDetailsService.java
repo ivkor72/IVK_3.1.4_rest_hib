@@ -24,7 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
         }
         UserDetails user = User.builder()
                 .id(myUser.getId())
-                .userName(myUser.getUsername())
+                .username(myUser.getUsername())
                 .password(myUser.getPassword())
                 .enabled(myUser.getEnabled())
                 .build();

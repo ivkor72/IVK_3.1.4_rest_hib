@@ -368,17 +368,17 @@ console.log("user= ",user);
     })
 
     $("#editButton").on('click', async () => {
-        let id = modal.find("#id").val();
+        let id = modal.find("#id").val().trim();
         let username = modal.find("#login").val().trim();
         let password = modal.find("#password").val().trim();
         let enabled = modal.find("#enabled").val().trim();
         let data = {
             id: id,
-            userName: username,
+            username: username,
             password: password,
             enabled: enabled
         }
-        console.log("for userFechService: data= ",data, "id= ", id)
+        console.log("for userFechService: data= ",data, "id= ", id);
         const response = await userFetchService.updateUser(data, id);
 
         if (response.ok) {
@@ -439,5 +439,6 @@ async function addNewUser() {
                         </div>`;
             addUserForm.prepend(alert)
         }
+
     })
 }

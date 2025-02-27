@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private long id;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -40,9 +40,9 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public User(long id, String userName, String password, boolean enabled) {
+    public User(long id, String username, String password, boolean enabled) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
         this.enabled = enabled;
     }
@@ -53,11 +53,11 @@ public class User implements UserDetails {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public void setUsername(String username) {
-        this.userName = username;
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -71,7 +71,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "username= "+userName + ", id= "+id+ ",pass= " + password;
+        return "username= "+username + ", id= "+id+ ",pass= " + password;
     }
 
     public boolean getEnabled() {

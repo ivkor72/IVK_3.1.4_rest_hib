@@ -50,6 +50,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user, String role) {
+        System.out.println("SAVE USER _ user= " + user+ "role= " + role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<User> userList = getAllUsers();
         for (User u : userList) {
@@ -119,6 +120,7 @@ public class UserDaoImpl implements UserDao {
     public void updateUser(long id) {
         User user = em.find(User.class, id);
         String role = roleDao.findRoleByIdy(user.getId());
+        System.out.println("UPDATE USER role= " + role + "user = " + user);
         saveUser(user, role);
     }
 

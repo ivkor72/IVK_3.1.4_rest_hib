@@ -60,10 +60,10 @@ public class MyRestController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable(value = "id") long id,
-                                                         @RequestBody @Valid User user,
+    public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable("id") long id,
+                                                         @RequestBody  User user,
                                                          BindingResult bindingResult) {
-        System.out.println("UPDATE  id= "+ id + "user= " + user);
+        System.out.println("PUT MAPPING id= "+ id +"user= "+ user);
         if (bindingResult.hasErrors()) {
             String error = getErrorsFromBindingResult(bindingResult);
             return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
