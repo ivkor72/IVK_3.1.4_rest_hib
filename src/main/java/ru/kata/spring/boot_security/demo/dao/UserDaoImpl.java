@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -48,6 +49,7 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    @Transactional
     @Override
     public void saveUser(User user, String role) {
         System.out.println("SAVE USER _ user= " + user+ "role= " + role);

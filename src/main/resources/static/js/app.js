@@ -17,7 +17,7 @@ const userFetchService = {
     findAllUsers: async () => await fetch('admin/api/users'),
     findOneUser: async (id) => await fetch(`admin/api/users/${id}`),
     addNewUser: async (user) => await fetch('admin/api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
-    updateUser: async (user, id) => await fetch(`admin/api/users/${id}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(user)}),
+    updateUser: async (data, id) => await fetch(`admin/api/users/${id}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(data)}),
     deleteUser: async (id) => await fetch(`admin/api/users/${id}`, {method: 'DELETE', headers: userFetchService.head})
 }
 
