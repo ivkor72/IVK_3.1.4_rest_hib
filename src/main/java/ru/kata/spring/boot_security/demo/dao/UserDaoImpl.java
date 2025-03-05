@@ -55,17 +55,18 @@ public class UserDaoImpl implements UserDao {
         System.out.println("SAVE USER _ user= " + user+ "role= " + role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<User> userList = getAllUsers();
-        for (User u : userList) {
-            if (Objects.equals(u.getUsername(), user.getUsername())) {
+//        for (User u : userList) {
+//            if (Objects.equals(u.getId(), user.getId())) {
                 em.merge(user);
+                System.out.println("MERGE - user= " + user);
                 em.flush();
                 roleDao.saveRole(user.getUsername(), role);
-                return;
-            }
-        }
-            em.persist(user);
-            em.flush();
-            roleDao.saveRole(user.getUsername(), role);
+//                return;
+//            }
+//        }
+//            em.persist(user);
+//            em.flush();
+//            roleDao.saveRole(user.getUsername(), role);
     }
 
     @Override
@@ -118,6 +119,7 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    @Transactional
     @Override
     public void updateUser(long id) {
         User user = em.find(User.class, id);

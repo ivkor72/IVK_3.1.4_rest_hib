@@ -167,7 +167,7 @@ console.log("user= ",user);
         let password = modal.find("#password").val().trim();
         let enabled = modal.find("#enabled").val().trim();
         let data = {
-            id: id,
+            id: parseInt(id),
             username: username,
             password: password,
             enabled: enabled
