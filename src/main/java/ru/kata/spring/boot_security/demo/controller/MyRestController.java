@@ -69,7 +69,7 @@ public class MyRestController {
             return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
         }
         try {
-            userService.updateUser(id);
+            userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (DataIntegrityViolationException e) {
             throw new UserWithSuchLoginExist("User with such login Exist");

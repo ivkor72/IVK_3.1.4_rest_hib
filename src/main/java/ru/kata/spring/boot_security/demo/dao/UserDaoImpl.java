@@ -119,10 +119,18 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    @Transactional
+//    @Transactional
+//    @Override
+//    public void updateUser(long id) {
+//        User user = em.find(User.class, id);
+//        String role = roleDao.findRoleByIdy(user.getId());
+//        System.out.println("UPDATE USER role= " + role + "user = " + user);
+//        saveUser(user, role);
+//    }
     @Override
-    public void updateUser(long id) {
-        User user = em.find(User.class, id);
+    @Transactional
+    public void updateUser(User user) {
+
         String role = roleDao.findRoleByIdy(user.getId());
         System.out.println("UPDATE USER role= " + role + "user = " + user);
         saveUser(user, role);

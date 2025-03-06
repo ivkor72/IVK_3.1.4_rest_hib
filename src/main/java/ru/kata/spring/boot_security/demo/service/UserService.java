@@ -19,5 +19,5 @@ public interface UserService {
 
     public User findByUsername(String username);
 
-    public void updateUser(long id);
+    public void updateUser(User user);
 }
