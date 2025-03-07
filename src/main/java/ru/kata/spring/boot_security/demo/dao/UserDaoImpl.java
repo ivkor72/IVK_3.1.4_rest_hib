@@ -52,21 +52,15 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     @Override
     public void saveUser(User user, String role) {
-        System.out.println("SAVE USER _ user= " + user+ "role= " + role);
+        System.out.println("SAVE USER _ user= " + user + "role= " + role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<User> userList = getAllUsers();
-//        for (User u : userList) {
-//            if (Objects.equals(u.getId(), user.getId())) {
-                em.merge(user);
-                System.out.println("MERGE - user= " + user);
-                em.flush();
-                roleDao.saveRole(user.getUsername(), role);
-//                return;
-//            }
-//        }
-//            em.persist(user);
-//            em.flush();
-//            roleDao.saveRole(user.getUsername(), role);
+
+        em.merge(user);
+        System.out.println("MERGE - user= " + user);
+        em.flush();
+        roleDao.saveRole(user.getUsername(), role);
+
     }
 
     @Override
@@ -77,14 +71,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUser(long id) {
-        List <Role> roles = em.createQuery("from Role", Role.class).getResultList();
+        List<Role> roles = em.createQuery("from Role", Role.class).getResultList();
         for (Role userR : roles) {
             if (userR.getId().equals(id)) {
                 em.remove(userR);
             }
-        };
+        }
+        ;
 
-            em.flush();
+        em.flush();
 
         User user = em.find(User.class, id);
         em.remove(user);
@@ -119,14 +114,7 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-//    @Transactional
-//    @Override
-//    public void updateUser(long id) {
-//        User user = em.find(User.class, id);
-//        String role = roleDao.findRoleByIdy(user.getId());
-//        System.out.println("UPDATE USER role= " + role + "user = " + user);
-//        saveUser(user, role);
-//    }
+
     @Override
     @Transactional
     public void updateUser(User user) {

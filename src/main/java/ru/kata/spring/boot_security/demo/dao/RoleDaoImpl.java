@@ -22,18 +22,14 @@ public class RoleDaoImpl implements RoleDao {
     private UserService userService;
 
 
+    @Transactional
 
-@Transactional
+    @Override
+    public void saveRole(String username, String authority) {
+        System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
+        Role role = new Role(username, authority);
+        System.out.println("SAVE ROLE: role " + role);
 
-@Override
-public void saveRole(String username, String authority) {
-    System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
-    Role role = new Role(username, authority);
-    System.out.println("SAVE ROLE: role " + role);
-//        if (authority == null || authority.isEmpty()) {
-//            return;
-//        }
-//
         List<Role> roles = findRolesByUser(username);
         for (Role role1 : roles) {
             if (Objects.equals(role1.getAuthority(), authority)) {
@@ -41,10 +37,10 @@ public void saveRole(String username, String authority) {
             }
         }
 
-    em.persist(role);
-    //   em.merge(role);
-    em.flush();
-}
+        em.persist(role);
+
+        em.flush();
+    }
 
     @Override
     public String findRoleByUsername(String username) {

@@ -44,16 +44,16 @@ public class MyRestController {
     }
 
 
-        @GetMapping("/users")
-        public ResponseEntity <List<User>> apiGetAllUsers() {
-            List<User> users = userService.getAllUsers();
-            System.out.println(users);
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> apiGetAllUsers() {
+        List<User> users = userService.getAllUsers();
+        System.out.println(users);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity <User> apiGetOneUser(@PathVariable("id") long id) {
-        System.out.println("id= "+ id);
+    public ResponseEntity<User> apiGetOneUser(@PathVariable("id") long id) {
+        System.out.println("id= " + id);
         User user = userService.findById(id);
         System.out.println("user= " + user);
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -61,9 +61,9 @@ public class MyRestController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<DataInfoHandler> apiUpdateUser(@PathVariable("id") long id,
-                                                         @RequestBody  User user,
+                                                         @RequestBody User user,
                                                          BindingResult bindingResult) {
-        System.out.println("PUT MAPPING id= "+ id +"user= "+ user);
+        System.out.println("PUT MAPPING id= " + id + "user= " + user);
         if (bindingResult.hasErrors()) {
             String error = getErrorsFromBindingResult(bindingResult);
             return new ResponseEntity<>(new DataInfoHandler(error), HttpStatus.BAD_REQUEST);
@@ -84,6 +84,7 @@ public class MyRestController {
                 .map(x -> x.getDefaultMessage())
                 .collect(Collectors.joining("; "));
     }
+
     @PostMapping("/users")
     public ResponseEntity<DataInfoHandler> apiAddNewUser(@Valid @RequestBody User user,
                                                          BindingResult bindingResult) {
@@ -106,25 +107,5 @@ public class MyRestController {
         return new ResponseEntity<>(new DataInfoHandler("User was deleted"), HttpStatus.OK);
     }
 
-//    @GetMapping("/findByUsername")
-//    public User showUserByUsername(String username) {
-//        User user = userService.findByUsername(username);
-//        return user;
-//    }
 
-
-//
-//    @PutMapping("/users/{username}")
-//    public ResponseEntity<User> updateUser(User user, String role) {
-//        role = "ROLE_ADMIN";
-//        userService.saveUser(user, role);
-//        return new ResponseEntity<>(user, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/users")
-//    public ModelAndView deleteUser(String username) {
-//        ModelAndView mav = new ModelAndView("/users");
-//        userService.deleteUser(username);
-//        return mav;
-//    }
 }

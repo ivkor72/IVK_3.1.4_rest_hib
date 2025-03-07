@@ -31,10 +31,10 @@
         </div>
         <div class="col-10 bg-dark text-white">
             <strong class="navbar-text text-end">
-                <a >user</a>
+                <a>user</a>
             </strong>
             with roles:
-            <a >user</a>
+            <a>user</a>
 
         </div>
         <div class="col-1 bg-dark text-white">
@@ -48,9 +48,9 @@
             <li class="nav-item">
                 <a class="nav-link active bg-primary text-white" aria-current="page">Admin</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="/user">User</a>-->
-<!--            </li>-->
+            <!--            <li class="nav-item">-->
+            <!--                <a class="nav-link" href="/user">User</a>-->
+            <!--            </li>-->
         </ul>
     </div>
     <div class="col-11 bg-light">
@@ -68,28 +68,28 @@
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <p><strong>Все пользователи</strong></p>
 
-                <div class="container-fluid">
+                    <div class="container-fluid">
 
-                    <div class="d-flex justify-content-left">
-                        <div>
-                            <table class="table table-striped" id="mainTableWithUsers">
-                                <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Login</th>
-                                    <th>Password</th>
-                                    <th>Enabled</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
+                        <div class="d-flex justify-content-left">
+                            <div>
+                                <table class="table table-striped" id="mainTableWithUsers">
+                                    <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Login</th>
+                                        <th>Password</th>
+                                        <th>Enabled</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
                     <div class="row">
@@ -100,50 +100,37 @@
                             <div class="d-flex justify-content-center">
 
                                 <div class="form-group align-items-center">
-                                    <form id="defaultSomeForm" >
-                                        <input class="form-control" id="AddNewUserLogin" type="text" placeholder="username"><br>
-                                        <input class="form-control" id="AddNewUserPassword" type="password" placeholder="password" autocomplete="off"><br>
-                                        <input class="form-control" id="AddNewUserEnabled" type="text" placeholder="enabled"><br>
+                                    <form id="defaultSomeForm">
+                                        <input class="form-control" id="AddNewUserLogin" type="text"
+                                               placeholder="username"><br>
+                                        <input class="form-control" id="AddNewUserPassword" type="password"
+                                               placeholder="password" autocomplete="off"><br>
+                                        <input class="form-control" id="AddNewUserEnabled" type="text"
+                                               placeholder="enabled"><br>
                                         <div class="d-flex flex-row bd-highlight">
                                             <div class="form-group">
                                                 <label for="roles">Roles</label>
-                                                <select class="custom-select bd-primary" multiple name="roles" id="roles">
+                                                <select class="custom-select bd-primary" multiple name="roles"
+                                                        id="roles">
                                                     <option value="1">USER</option>
                                                     <option value="2">ADMIN</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new user</button>
+                                        <button class="btn btn-primary mb-2" type="button" id="addNewUserButton">Add new
+                                            user
+                                        </button>
                                     </form>
-<!--                                    <div class="p-2">-->
-<!--                                        <button class="btn btn-outline-success" id="SliderNewUserForm">Show panel</button>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="p-2">-->
+                                    <!--                                        <button class="btn btn-outline-success" id="SliderNewUserForm">Show panel</button>-->
+                                    <!--                                    </div>-->
                                 </div>
 
                             </div>
                         </div>
 
                         <!--скрытое модальное окно -->
-<!--                        <div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">-->
-<!--                            <div class="modal-dialog">-->
-<!--                                <div class="modal-content">-->
 
-<!--                                    <div class="modal-header">-->
-<!--                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
-<!--                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                                            <span aria-hidden="true">&times;</span>-->
-<!--                                        </button>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="modal-body">-->
-<!--                                    </div>-->
-
-<!--                                    <div class="modal-footer">-->
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -152,90 +139,9 @@
 
 </div>
 
-
-<!--&lt;!&ndash;модальное окно редактирования пользователя &ndash;&gt;-->
-<!--<div class="myEditForm">-->
-<!--    <form class="col-3" >-->
-<!--        <div class="modal fade" id="exampleModalEdit" tabindex="-1" role="dialog"-->
-<!--             aria-labelledby="exampleModalLabelEdit" aria-hidden="true">-->
-<!--            <div class="modal-dialog" role="document">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="exampleModalLabelEdit">Редактирование</h5>-->
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                            <span aria-hidden="true">&times;</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-
-<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="username1" class="col-form-label">Логин:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <input name="username" type="text" id="username1">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="password1" class="col-form-label">Пароль:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <input type="password" class="form-control" id="password1" name="password" autocomplete="on">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <label for="enabled1" class="col-form-label">Доступ:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <input type="text" class="form-control" id="enabled1" name="enabled">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                        <div class="d-flex flex-row bd-highlight">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <div class="form-group">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <label for="roles1">Роли</label>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                                <select class="custom-select bd-primary" multiple name="roles1" id="roles1">&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option value="ROLE_USER">USER</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <option value="ROLE_ADMIN">ADMIN</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
-
-<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--&lt;!&ndash;                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <input type="submit" id="upd" class="btn btn-success" value="Сохранить"/>&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--&lt;!&ndash; Модальное окно по удалению пользователя &ndash;&gt;-->
-<!--<div class="myDeleteForm">-->
-<!--    <form>-->
-<!--        <div class="modal fade" id="exampleModalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDelete" aria-hidden="true">-->
-<!--            <div class="modal-dialog" role="document">-->
-<!--                <div class="modal-content">-->
-<!--                    <div class="modal-header">-->
-<!--                        <h5 class="modal-title" id="exampleModalLabelDelete">Удаление</h5>-->
-<!--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                            <span aria-hidden="true">&times;</span>-->
-<!--                        </button>-->
-<!--                    </div>-->
-<!--                    <div class="modal-body">-->
-
-<!--                        <div class="form-group">-->
-<!--                            <label for="userName2" class="col-form-label">Логин:</label>-->
-<!--                            <input name="userName" type="text" id="userName2">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="modal-footer">-->
-<!--                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>-->
-<!--                        <input type="submit" class="btn btn-danger" value="Удалить"/>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--    </form>-->
-<!--</div>-->
-
 <!--скрытое дефолтное модальное окно -->
-<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel" aria-hidden="true">
+<div class="modal fade" id="someDefaultModal" tabindex="-1" role="dialog" aria-labelledby="someDefaultModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -256,11 +162,8 @@
     </div>
 </div>
 
-<!--<script src="webjars/jquery/3.5.1/jquery.js"></script>-->
-<!--<script src="webjars/popper.js/1.16.0/umd/popper.js"></script>-->
-<!--<script src="webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>-->
-<!-- <script src="webjars/jquery/3.3.1/jquery.min.js"></script>-->
- <script type="text/javascript" src="/js/app.js"></script>
+
+<script type="text/javascript" src="/js/app.js"></script>
 
 </body>
 </html>

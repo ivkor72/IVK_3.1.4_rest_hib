@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
@@ -96,7 +97,7 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "username= "+username + ", id= "+id+ ",pass= " + password + ", enabled= "+enabled;
+        return "username= " + username + ", id= " + id + ",pass= " + password + ", enabled= " + enabled;
     }
 
     public boolean getEnabled() {

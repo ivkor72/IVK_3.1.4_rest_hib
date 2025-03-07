@@ -38,14 +38,14 @@ public class UserController {
         model.addAttribute("roles", roles);
         boolean isRoleAdmin = false;
         for (Role role : roles) {
-            if (Objects.equals(role.getAuthority(), "ROLE_ADMIN")){
+            if (Objects.equals(role.getAuthority(), "ROLE_ADMIN")) {
                 isRoleAdmin = true;
             } else {
                 isRoleAdmin = false;
             }
         }
         model.addAttribute("isRoleAdmin", isRoleAdmin);
-        System.out.println("aUT: " + username + " " + user.toString()+" roles: "+roles);
+        System.out.println("aUT: " + username + " " + user.toString() + " roles: " + roles);
         return "user";
     }
 }

@@ -1,4 +1,3 @@
-
 $(async function () {
     await getTableWithUsers();
     getNewUserForm();
@@ -16,8 +15,16 @@ const userFetchService = {
     // bodyAdd : async function(user) {return {'method': 'POST', 'headers': this.head, 'body': user}},
     findAllUsers: async () => await fetch('admin/api/users'),
     findOneUser: async (id) => await fetch(`admin/api/users/${id}`),
-    addNewUser: async (user) => await fetch('admin/api/users', {method: 'POST', headers: userFetchService.head, body: JSON.stringify(user)}),
-    updateUser: async (data, id) => await fetch(`admin/api/users/${id}`, {method: 'PUT', headers: userFetchService.head, body: JSON.stringify(data)}),
+    addNewUser: async (user) => await fetch('admin/api/users', {
+        method: 'POST',
+        headers: userFetchService.head,
+        body: JSON.stringify(user)
+    }),
+    updateUser: async (data, id) => await fetch(`admin/api/users/${id}`, {
+        method: 'PUT',
+        headers: userFetchService.head,
+        body: JSON.stringify(data)
+    }),
     deleteUser: async (id) => await fetch(`admin/api/users/${id}`, {method: 'DELETE', headers: userFetchService.head})
 }
 
@@ -58,10 +65,10 @@ async function getTableWithUsers() {
                         
                 )`;
 
-                console.log("uid= ",uid);
+                console.log("uid= ", uid);
 
 
-                console.log("data-userid= ",$(idEditButton).attr('data-userid'));
+                console.log("data-userid= ", $(idEditButton).attr('data-userid'));
                 console.log("##########")
                 table.append(tableFilling);
             })
@@ -75,7 +82,7 @@ async function getTableWithUsers() {
 
         let buttonUserId = targetButton.attr('data-userid')
         let buttonAction = targetButton.attr('data-action');
-console.log("buttonUserId= ", buttonUserId);
+        console.log("buttonUserId= ", buttonUserId);
         defaultModal.attr('data-userid', buttonUserId);
         defaultModal.attr('data-action', buttonAction);
         defaultModal.modal('show');
@@ -137,7 +144,7 @@ async function editUser(modal, id) {
     console.log(id);
     let preuser = await userFetchService.findOneUser(id);
     let user = preuser.json();
-console.log("user= ",user);
+    console.log("user= ", user);
     modal.find('.modal-title').html('Edit user');
 
     let editButton = `<button  class="btn btn-outline-success" id="editButton" value="${user.id}">Edit</button>`;
@@ -172,7 +179,7 @@ console.log("user= ",user);
             password: password,
             enabled: enabled
         }
-        console.log("for userFechService: data= ",data, "id= ", id);
+        console.log("for userFechService: data= ", data, "id= ", id);
         const response = await userFetchService.updateUser(data, id);
 
         if (response.ok) {
@@ -204,7 +211,7 @@ async function deleteUser(modal, id) {
 
 
 async function addNewUser() {
-    $('#addNewUserButton').click(async () =>  {
+    $('#addNewUserButton').click(async () => {
         let addUserForm = $('#defaultSomeForm')
         let id = addUserForm.find('#AddNewUserId').val();
         let username = addUserForm.find('#AddNewUserLogin').val().trim();

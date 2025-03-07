@@ -14,5 +14,5 @@ public interface RoleDao {
 
     public String findRoleByUsername(String username);
 
-    public  String findRoleByIdy(long id);
+    public String findRoleByIdy(long id);
 }

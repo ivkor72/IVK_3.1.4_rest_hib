@@ -29,10 +29,12 @@ public class AdminController {
         this.passwordEncoder = passwordEncoder;
         this.roleDao = roleDao;
     }
+
     public static class UsersAndRoles {
         private String username;
         private boolean enabled;
         private List<Role> roles;
+
         UsersAndRoles(String username, boolean enabled, List<Role> roles) {
             this.username = username;
             this.enabled = enabled;
@@ -63,27 +65,9 @@ public class AdminController {
             this.roles = roles;
         }
     }
+
     @GetMapping(value = "/admin")
     public String showAllUsers(ModelMap model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentusername = authentication.getName();
-//        User currentuser = userService.getUser(currentusername);
-//        List<Role> currentuserroles = roleDao.findRolesByUser(currentusername);
-//        model.addAttribute("currentusername", currentusername);
-//        model.addAttribute("currentuserroles", currentuserroles);
-//        List<String> messages = new ArrayList<>();
-//        List<User> allUsers = userService.getAllUsers();
-//        List<Role> roles = new ArrayList<>();
-//        List<UsersAndRoles> usersAndRoles = new ArrayList<>();
-//        for (User user : allUsers) {
-//            roles = roleDao.findRolesByUser(user.getUsername());
-//            usersAndRoles.add(new UsersAndRoles(user.getUsername(), user.getEnabled(), roles));
-//        }
-//        model.addAttribute("usersAndRoles", usersAndRoles);
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        Role role = new Role();
-//        model.addAttribute("role", role);
         return "users";
     }
 
@@ -96,73 +80,4 @@ public class AdminController {
         return "addUser";
     }
 
-//    @RequestMapping(value = "/saveUser")
-//        public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("message") String message,@ModelAttribute("role") String role) {
-//        System.out.println("======SAVE_USER: USER - name - "+user.getUsername()+", enabled - "+user.getEnabled()+" , MESSAGE - "+message+" , ROLE - "+role);
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        userService.saveUser(user,  role);
-//        return "redirect:/admin";
-//    }
-
-//    @RequestMapping(value = "/updateUser")
-//    public String updateUser(@RequestParam("user") User user, Model model) {
-//        model.addAttribute("user", user);
-//        model.addAttribute("message", "Update User");
-//        return "#exampleModalEdit";
-//    }
-
-//    @RequestMapping(value = "/deleteUser")
-//    public String deleteUser(@RequestParam("username") String username, Model model) {
-//        userService.deleteUser(username);
-//        return "redirect:/admin";
-//    }
-
-//    @RequestMapping(value = "/registration")
-//    public String showRegistrationForm(ModelMap model) {
-//        model.addAttribute("message", "Please enter your registration credentials");
-//        User user = new User();
-//        user.setEnabled(true);
-//        model.addAttribute("user", user);
-//        return "addUser";
-//    }
-//
-//    @RequestMapping(value = "/showRoles")
-//    public String showRolesByUser(@RequestParam("username") String username, ModelMap model) {
-//        modelForRoles(username, model);
-//        return "showRoles";
-//    }
-//
-//    public ModelMap modelForRoles(String username, ModelMap model) {
-//        List<Role> roles = roleDao.findRolesByUser(username);
-//        model.addAttribute("roles", roles);
-//        model.addAttribute("username", username);
-//        return model;
-//    }
-//
-//    @RequestMapping(value = "updateRole")
-//    public String updateRole(@RequestParam("username") String username, ModelMap model) {
-//        modelForRoles(username, model);
-//        return "updateRole";
-//    }
-//
-//    @RequestMapping(value = "/deleteRole")
-//    public String deleteRole(@RequestParam("username") String username, @RequestParam("role") String role, ModelMap model) {
-//        roleDao.deleteRole(username, role);
-//        modelForRoles(username, model);
-//        return "redirect:/updateRole?username=" + username;
-//    }
-//
-//    @RequestMapping(value = "/addRoleUser")
-//    public String addRoleUser(@RequestParam("username") String username, ModelMap model) {
-//        roleDao.saveRole(username, "ROLE_USER");
-//        modelForRoles(username, model);
-//        return "redirect:/show";
-//    }
-//
-//    @RequestMapping(value = "/addRoleAdmin")
-//    public String addRoleAdmin(@RequestParam("username") String username, ModelMap model) {
-//        roleDao.saveRole(username, "ROLE_ADMIN");
-//        modelForRoles(username, model);
-//        return "redirect:/updateRole?username=" + username;
-//    }
 }
