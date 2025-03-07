@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
+import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -14,30 +15,36 @@ import java.util.Objects;
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
+
     @Autowired
     private EntityManager em;
 
+    private UserService userService;
 
-    @Override
-    public void saveRole(String username, String authority) {
-        System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
-        Role role = new Role(username, authority);
-        System.out.println("SAVE ROLE: role " + role);
+
+
+@Transactional
+
+@Override
+public void saveRole(String username, String authority) {
+    System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
+    Role role = new Role(username, authority);
+    System.out.println("SAVE ROLE: role " + role);
 //        if (authority == null || authority.isEmpty()) {
 //            return;
 //        }
 //
-//        List<Role> roles = findRolesByUser(username);
-//        for (Role role1 : roles) {
-//            if (Objects.equals(role1.getAuthority(), authority)) {
-//                return;
-//            }
-//        }
+        List<Role> roles = findRolesByUser(username);
+        for (Role role1 : roles) {
+            if (Objects.equals(role1.getAuthority(), authority)) {
+                return;
+            }
+        }
 
-        em.persist(role);
-     //   em.merge(role);
-        em.flush();
-    }
+    em.persist(role);
+    //   em.merge(role);
+    em.flush();
+}
 
     @Override
     public String findRoleByUsername(String username) {
