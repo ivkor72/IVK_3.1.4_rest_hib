@@ -1,5 +1,4 @@
-package ru.kata.spring.boot_security.demo.exceptionHandler;
-
+package ru.kata.spring.boot_security.demo.exceptionhandler;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,4 +24,3 @@ public class DataInfoHandler {
         return new DataInfoHandler(info);
     }
 }
-

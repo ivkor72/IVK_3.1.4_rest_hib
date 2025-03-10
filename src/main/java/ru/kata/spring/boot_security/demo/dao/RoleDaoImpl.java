@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.service.UserService;
-
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,30 +14,23 @@ import java.util.Objects;
 @Repository
 public class RoleDaoImpl implements RoleDao {
 
-
     @Autowired
     private EntityManager em;
-
     private UserService userService;
 
-
     @Transactional
-
     @Override
     public void saveRole(String username, String authority) {
         System.out.println("SAVE ROLE: Username: " + username + " Authority: " + authority);
         Role role = new Role(username, authority);
         System.out.println("SAVE ROLE: role " + role);
-
         List<Role> roles = findRolesByUser(username);
         for (Role role1 : roles) {
             if (Objects.equals(role1.getAuthority(), authority)) {
                 return;
             }
         }
-
         em.persist(role);
-
         em.flush();
     }
 

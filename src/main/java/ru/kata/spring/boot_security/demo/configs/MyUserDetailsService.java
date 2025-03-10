@@ -14,7 +14,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @EnableWebSecurity
 public class MyUserDetailsService implements UserDetailsService {
 
-    @Autowired private UserService userService;
+    @Autowired
+    private UserService userService;
+    public MyUserDetailsService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.dao;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -11,18 +10,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
-
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -46,7 +42,6 @@ public class UserDaoImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> usersList = em.createQuery("from User", User.class).getResultList();
         return usersList;
-
     }
 
     @Transactional
@@ -55,12 +50,10 @@ public class UserDaoImpl implements UserDao {
         System.out.println("SAVE USER _ user= " + user + "role= " + role);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         List<User> userList = getAllUsers();
-
         em.merge(user);
         System.out.println("MERGE - user= " + user);
         em.flush();
         roleDao.saveRole(user.getUsername(), role);
-
     }
 
     @Override
@@ -77,10 +70,7 @@ public class UserDaoImpl implements UserDao {
                 em.remove(userR);
             }
         }
-        ;
-
         em.flush();
-
         User user = em.find(User.class, id);
         em.remove(user);
         em.flush();
@@ -89,14 +79,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User findById(long id) {
         User user = em.find(User.class, id);
-        return user;
-    }
-
-
-    @Override
-    public User findUserById(long id) {
-        User user = em.find(User.class, id);
-
         return user;
     }
 
@@ -114,11 +96,9 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-
     @Override
     @Transactional
     public void updateUser(User user) {
-
         String role = roleDao.findRoleByIdy(user.getId());
         System.out.println("UPDATE USER role= " + role + "user = " + user);
         saveUser(user, role);
@@ -146,27 +126,22 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteById(Long aLong) {
-
     }
 
     @Override
     public void delete(User entity) {
-
     }
 
     @Override
     public void deleteAllById(Iterable<? extends Long> longs) {
-
     }
 
     @Override
     public void deleteAll(Iterable<? extends User> entities) {
-
     }
 
     @Override
     public void deleteAll() {
-
     }
 
     @Override
@@ -191,7 +166,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void flush() {
-
     }
 
     @Override
@@ -206,17 +180,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteAllInBatch(Iterable<User> entities) {
-
     }
 
     @Override
     public void deleteAllByIdInBatch(Iterable<Long> longs) {
-
     }
 
     @Override
     public void deleteAllInBatch() {
-
     }
 
     @Override

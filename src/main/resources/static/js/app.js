@@ -5,7 +5,6 @@ $(async function () {
     addNewUser();
 })
 
-
 const userFetchService = {
     head: {
         'Accept': 'application/json',
@@ -37,21 +36,14 @@ async function getTableWithUsers() {
         .then(users => {
 
             users.forEach(user => {
-
-
                 let uid = user.id;
                 let idEditButton = uid.toString();
-                let tableFilling = `$(
-                        
-                        <tr>
-                            
-                     
+                let tableFilling = `$(        
+                        <tr
                             <td>${user.id}</td>
                             <td>${user.username}</td>
                             <td>${user.password.slice(0, 15)}...</td>
                             <td>${user.enabled}</td>
-                            
-                            
                             <td>
                                 <button type="button"  id=idEditButton data-userid="${user.id}" data-action="edit" class="btn btn-outline-secondary"
                                 data-toggle="modal" data-target="#exampleModalEdit"></button>
@@ -60,14 +52,9 @@ async function getTableWithUsers() {
                                 <button type="button" data-userid="${user.id}" data-action="delete" class="btn btn-outline-danger"
                                 data-toggle="modal" data-target="#exampleModalDelete"></button>
                             </td>
-                      
-                        </tr>
-                        
+                        </tr>    
                 )`;
-
                 console.log("uid= ", uid);
-
-
                 console.log("data-userid= ", $(idEditButton).attr('data-userid'));
                 console.log("##########")
                 table.append(tableFilling);
@@ -78,8 +65,7 @@ async function getTableWithUsers() {
     // достаем из нее данные и отдаем модалке, которую к тому же открываем
     $("#mainTableWithUsers").find('button').on('click', (event) => {
         let defaultModal = $('#someDefaultModal');
-        let targetButton = $(event.target);
-
+        let targetButton = $(event.target)
         let buttonUserId = targetButton.attr('data-userid')
         let buttonAction = targetButton.attr('data-action');
         console.log("buttonUserId= ", buttonUserId);
@@ -88,7 +74,6 @@ async function getTableWithUsers() {
         defaultModal.modal('show');
     })
 }
-
 
 async function getNewUserForm() {
     let button = $(`#SliderNewUserForm`);
@@ -105,7 +90,6 @@ async function getNewUserForm() {
         }
     })
 }
-
 
 // что то деалем при открытии модалки и при закрытии
 // основываясь на ее дата атрибутах
@@ -137,7 +121,6 @@ async function getDefaultModal() {
     })
 }
 
-
 // редактируем юзера из модалки редактирования, забираем данные, отправляем
 async function editUser(modal, id) {
     console.log("@@@");
@@ -146,12 +129,10 @@ async function editUser(modal, id) {
     let user = preuser.json();
     console.log("user= ", user);
     modal.find('.modal-title').html('Edit user');
-
     let editButton = `<button  class="btn btn-outline-success" id="editButton" value="${user.id}">Edit</button>`;
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
     modal.find('.modal-footer').append(editButton);
     modal.find('.modal-footer').append(closeButton);
-
     user.then(user => {
         let bodyForm = `
             <form class="form-group" id="editUser">
@@ -167,7 +148,6 @@ async function editUser(modal, id) {
         `;
         modal.find('.modal-body').append(bodyForm);
     })
-
     $("#editButton").on('click', async () => {
         let id = modal.find("#id").val().trim();
         let username = modal.find("#login").val().trim();
@@ -181,7 +161,6 @@ async function editUser(modal, id) {
         }
         console.log("for userFechService: data= ", data, "id= ", id);
         const response = await userFetchService.updateUser(data, id);
-
         if (response.ok) {
             getTableWithUsers();
             modal.modal('hide');
@@ -198,7 +177,6 @@ async function editUser(modal, id) {
     })
 }
 
-
 // удаляем юзера из модалки удаления
 async function deleteUser(modal, id) {
     await userFetchService.deleteUser(id);
@@ -208,7 +186,6 @@ async function deleteUser(modal, id) {
     let closeButton = `<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>`
     modal.find('.modal-footer').append(closeButton);
 }
-
 
 async function addNewUser() {
     $('#addNewUserButton').click(async () => {
@@ -240,6 +217,5 @@ async function addNewUser() {
                         </div>`;
             addUserForm.prepend(alert)
         }
-
     })
 }

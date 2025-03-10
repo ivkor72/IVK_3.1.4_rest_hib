@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.exceptionHandler;
+package ru.kata.spring.boot_security.demo.exceptionhandler;
 
 import org.springframework.dao.DataIntegrityViolationException;
 

@@ -2,15 +2,15 @@ package ru.kata.spring.boot_security.demo.model;
 
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.transaction.annotation.Transactional;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Column;
 
-import javax.persistence.*;
-
-@Transactional
 @Entity
 @Table(name = "authorities")
 public class Role implements GrantedAuthority {
-
 
     @Id
     @PrimaryKeyJoinColumn(name = "users.id")
@@ -25,15 +25,12 @@ public class Role implements GrantedAuthority {
         this.id = id;
     }
 
-
     @Getter
     @Column(name = "username")
     private String userName;
 
-
     @Column(name = "authority")
     private String authority;
-
 
     public Role(String userName, String authority) {
         this.userName = userName;
